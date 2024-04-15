@@ -9,6 +9,7 @@ public class JumpController : MonoBehaviour
     [SerializeField] private float rotationSpeed, jumpForce, extraImpulseGrowth, _maxFallSpeed;
     private float _baseJumpForce;
     private Rigidbody2D _rb;
+    private Animator _animator;
     bool _grabbedRight, _grabbedLeft;
 
 
@@ -18,6 +19,7 @@ public class JumpController : MonoBehaviour
         _grabbedRight = false;
         _grabbedLeft = false;
         _baseJumpForce = jumpForce;
+        _animator = GetComponent<Animator>();
     }
 
     void FixedUpdate()
@@ -40,6 +42,9 @@ public class JumpController : MonoBehaviour
         }
         else if(_grabbedRight && _grabbedLeft)
         {
+            _animator.SetBool("GrabBoth", true);
+            _rb.velocity = new Vector3(0f, 0f, 0f);
+            _rb.gravityScale = 0f;
             if(jumpForce < 10) jumpForce = jumpForce + extraImpulseGrowth * Time.deltaTime;
         }
         else if(!_grabbedRight && !_grabbedLeft)
@@ -55,11 +60,13 @@ public class JumpController : MonoBehaviour
 
     public void GrabRight()
     {
+        _animator.SetBool("GrabRight", true);
         _grabbedRight = true;
     }
 
     public void GrabLeft()
     {
+        _animator.SetBool("GrabLeft", true);
         _grabbedLeft = true;
     }
 
@@ -71,6 +78,8 @@ public class JumpController : MonoBehaviour
             _rb.AddForce(transform.up * jumpForce, ForceMode2D.Impulse);
             jumpForce = _baseJumpForce;
         }
+        _animator.SetBool("GrabRight", false);
+        _animator.SetBool("GrabBoth", false);
     }
 
     public void ReleaseLeft()
@@ -81,6 +90,8 @@ public class JumpController : MonoBehaviour
             _rb.AddForce(transform.up * jumpForce, ForceMode2D.Impulse);
             jumpForce = _baseJumpForce;
         }
+        _animator.SetBool("GrabLeft", false);
+        _animator.SetBool("GrabBoth", false);
     }
 }
 
