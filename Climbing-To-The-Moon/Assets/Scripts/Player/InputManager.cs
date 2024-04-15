@@ -31,9 +31,9 @@ public class InputManager : MonoBehaviour
 
     private void Start()
     {
-        _input.Controls.LeftHand.started += ctx => StartLeftHand(ctx);   
+        _input.Controls.LeftHand.performed += ctx => StartLeftHand(ctx);   
         _input.Controls.LeftHand.canceled += ctx => EndLeftHand(ctx);
-        _input.Controls.RightHand.started += ctx => StartRightHand(ctx);
+        _input.Controls.RightHand.performed += ctx => StartRightHand(ctx);
         _input.Controls.RightHand.canceled += ctx => EndRightHand(ctx);
     }
 
@@ -44,6 +44,8 @@ public class InputManager : MonoBehaviour
             _jumpController.GrabRight();
             _isHoldingRight = true;
         }
+        else if (!_isHoldingLeft)
+            _jumpController.MoveRight();
         Debug.Log("Pulso la E");
     }
 
@@ -54,6 +56,7 @@ public class InputManager : MonoBehaviour
             _jumpController.ReleaseRight();
             _isHoldingRight = false;
         }
+        _jumpController.ResetHorizontalDir();
     }
 
     private void StartLeftHand(InputAction.CallbackContext context)
@@ -63,6 +66,8 @@ public class InputManager : MonoBehaviour
             _jumpController.GrabLeft();
             _isHoldingLeft = true;
         }
+        else if (!_isHoldingRight)
+            _jumpController.MoveLeft();
         Debug.Log("Pulso la Q");
     }
 
@@ -73,5 +78,6 @@ public class InputManager : MonoBehaviour
             _jumpController.ReleaseLeft();
             _isHoldingLeft = false;
         }
+        _jumpController.ResetHorizontalDir();
     }
 }

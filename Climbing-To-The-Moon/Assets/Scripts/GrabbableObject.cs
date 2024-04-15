@@ -18,7 +18,7 @@ public class GrabbableObject : MonoBehaviour
             _inputManager.IsRightHandColliding = true;
     }
 
-        private void OnTriggerStay2D(Collider2D other)
+    private void OnTriggerStay2D(Collider2D other)
     {
         if (other.CompareTag("LeftHand"))
             _inputManager.IsLeftHandColliding = true;
