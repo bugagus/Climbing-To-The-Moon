@@ -8,9 +8,13 @@ public class InputManager : MonoBehaviour
     private JumpController _jumpController;
     public bool IsLeftHandColliding {  get; set; }
     public bool IsRightHandColliding {  get; set; }
+    private bool _isHoldingRight;
+    private bool _isHoldingLeft;
 
     private void Awake()
     {
+        _isHoldingRight = false;
+        _isHoldingLeft = false;
         _input = new InputControls();
         _jumpController = gameObject.GetComponent<JumpController>();
     }
@@ -36,24 +40,38 @@ public class InputManager : MonoBehaviour
     private void StartRightHand(InputAction.CallbackContext context)
     {
         if (IsRightHandColliding)
+        {
             _jumpController.GrabRight();
+            _isHoldingRight = true;
+        }
         Debug.Log("Pulso la E");
     }
 
     private void EndRightHand(InputAction.CallbackContext context)
     {
-        _jumpController.ReleaseRight();
+        if(_isHoldingRight)
+        {
+            _jumpController.ReleaseRight();
+            _isHoldingRight = false;
+        }
     }
 
     private void StartLeftHand(InputAction.CallbackContext context)
     {
         if (IsLeftHandColliding)
+        {
             _jumpController.GrabLeft();
+            _isHoldingLeft = true;
+        }
         Debug.Log("Pulso la Q");
     }
 
     private void EndLeftHand(InputAction.CallbackContext context)
     {
-        _jumpController.ReleaseLeft();
+        if(_isHoldingLeft)
+        {
+            _jumpController.ReleaseLeft();
+            _isHoldingLeft = false;
+        }
     }
 }

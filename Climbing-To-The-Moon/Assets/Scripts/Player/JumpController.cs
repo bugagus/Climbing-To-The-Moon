@@ -20,7 +20,7 @@ public class JumpController : MonoBehaviour
         _baseJumpForce = jumpForce;
     }
 
-    void Update()
+    void FixedUpdate()
     {
         if(_grabbedRight && !_grabbedLeft)
         {
