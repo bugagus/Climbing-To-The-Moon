@@ -7,8 +7,8 @@ public class RopeBridge : MonoBehaviour
     public Transform StartPoint;
     public Transform EndPoint;
 
-    private float _distance;
     private LineRenderer lineRenderer;
+    private float _initialX;
     private List<RopeSegment> ropeSegments = new List<RopeSegment>();
     [SerializeField]private float ropeSegLen = 0.25f;
     [SerializeField]private int segmentLength = 20;
@@ -17,6 +17,7 @@ public class RopeBridge : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        //_initialX = transform.position.x;
         this.lineRenderer = this.GetComponent<LineRenderer>();
         Vector3 ropeStartPoint = StartPoint.position;
 
@@ -28,13 +29,16 @@ public class RopeBridge : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
-    {
-        this.DrawRope();
-    }
+    //void Update()
+    //{
+    //    this.DrawRope();
+    //    this.Simulate();
+    //}
 
     private void FixedUpdate()
     {
+        this.DrawRope();
+        //EndPoint.position = new Vector3(_initialX, EndPoint.position.y, EndPoint.position.z);
         this.Simulate();
     }
 

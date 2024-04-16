@@ -416,7 +416,7 @@ MonoBehaviour:
   rotationSpeed: 3
   jumpForce: 7
   extraImpulseGrowth: 2
-  _maxFallSpeed: 20
+  _maxSpeed: 3.05
   _horizontalForce: 2.95
 --- !u!114 &950773165
 MonoBehaviour:
