@@ -205,32 +205,35 @@ public class JumpController : MonoBehaviour
 
     private void GroundCheck()
     {
-        bool _lastGrounded = _grounded;
-
-        Vector2 boxSize = new Vector2(0.6f, 1.2f);
-        Vector2 boxCenter = transform.TransformPoint(floorCheck.localPosition); // Convertir la posición local a global
-
-        _grounded = Physics2D.OverlapBox(boxCenter, boxSize, 0, floorLayer);
-
-        if (!_lastGrounded && _grounded)
+        if(!_grabbedLeft && !_grabbedRight)
         {
-            // Si viene del aire y toca el suelo
-            _rb.velocity = Vector2.zero;
-            foreach (GameObject obj in objectsDisabilitedOnGround)
-            {
-                obj.SetActive(false);
-            }
-            transform.rotation = Quaternion.identity; // Rotar a la rotación inicial (0,0,0)
-        }
-        else if (_lastGrounded && !_grounded)
-        {
-            foreach (GameObject obj in objectsDisabilitedOnGround)
-            {
-                obj.SetActive(true);
-            }
-        }
+            bool _lastGrounded = _grounded;
 
-        _animator.SetBool("OnAir", !_grounded);
+            Vector2 boxSize = new Vector2(0.2f, 1.2f);
+            Vector2 boxCenter = transform.TransformPoint(floorCheck.localPosition); // Convertir la posición local a global
+
+            _grounded = Physics2D.OverlapBox(boxCenter, boxSize, 0, floorLayer);
+
+            if (!_lastGrounded && _grounded)
+            {
+                // Si viene del aire y toca el suelo
+                _rb.velocity = Vector2.zero;
+                foreach (GameObject obj in objectsDisabilitedOnGround)
+                {
+                    obj.SetActive(false);
+                }
+                transform.rotation = Quaternion.identity; // Rotar a la rotación inicial (0,0,0)
+            }
+            else if (_lastGrounded && !_grounded)
+            {
+                foreach (GameObject obj in objectsDisabilitedOnGround)
+                {
+                    obj.SetActive(true);
+                }
+            }
+
+            _animator.SetBool("OnAir", !_grounded);
+        }
     }
 
 }
