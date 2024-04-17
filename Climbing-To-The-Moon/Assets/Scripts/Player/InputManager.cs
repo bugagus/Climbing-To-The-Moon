@@ -7,7 +7,6 @@ public class InputManager : MonoBehaviour
 {
     private InputControls _input;
     private JumpController _jumpController;
-    public bool IsHandColling { get; set; }
 
     private void Awake()
     {

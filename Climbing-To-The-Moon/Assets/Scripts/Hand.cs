@@ -19,7 +19,7 @@ public class Hand : MonoBehaviour
     {
         if (other.CompareTag("GrabbableObject"))
         {
-            _inputManager.IsHandColling = true;
+            IsHandColliding = true;
             touchedGrabbableObject = other.GetComponent<GrabbableObject>();
         }
     }
@@ -28,7 +28,7 @@ public class Hand : MonoBehaviour
     {
         if (other.CompareTag("GrabbableObject"))
         {
-            _inputManager.IsHandColling = true;
+            IsHandColliding = true;
             touchedGrabbableObject = other.GetComponent<GrabbableObject>();
         }
     }
@@ -36,7 +36,7 @@ public class Hand : MonoBehaviour
     private void OnTriggerExit2D(Collider2D other)
     {
         if (other.CompareTag("GrabbableObject"))
-            _inputManager.IsHandColling = false;
+            IsHandColliding = false;
         IsHandGrabbed = false;
     }
 }
