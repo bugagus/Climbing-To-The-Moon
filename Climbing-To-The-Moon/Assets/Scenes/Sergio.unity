@@ -566,6 +566,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52c80fa219055ec439cac94513fde088, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  stamina: 100
+  maxStamina: 100
   slider: {fileID: 1420740200}
 --- !u!4 &616894801
 Transform:
@@ -936,7 +938,7 @@ SpriteRenderer:
   m_Size: {x: 0.64, y: 0.32}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!4 &950773162
@@ -1000,7 +1002,8 @@ MonoBehaviour:
   rotationSpeed: 3
   jumpForce: 7
   extraImpulseGrowth: 2
-  _maxFallSpeed: 20
+  _maxSpeed: 0
+  _horizontalForce: 0
 --- !u!114 &950773165
 MonoBehaviour:
   m_ObjectHideFlags: 0
