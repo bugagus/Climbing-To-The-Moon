@@ -55,6 +55,9 @@ public class InputManager : MonoBehaviour
         {
             _jumpController.ReleaseRight();
             _isHoldingRight = false;
+        }else
+        {
+            _jumpController.JumpRight();
         }
         _jumpController.ResetHorizontalDir();
     }
@@ -77,6 +80,9 @@ public class InputManager : MonoBehaviour
         {
             _jumpController.ReleaseLeft();
             _isHoldingLeft = false;
+        }else
+        {
+            _jumpController.JumpLeft();
         }
         _jumpController.ResetHorizontalDir();
     }
