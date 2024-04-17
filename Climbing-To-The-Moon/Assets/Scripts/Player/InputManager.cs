@@ -2,19 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+
 public class InputManager : MonoBehaviour
 {
     private InputControls _input;
     private JumpController _jumpController;
-    public bool IsLeftHandColliding {  get; set; }
-    public bool IsRightHandColliding {  get; set; }
-    private bool _isHoldingRight;
-    private bool _isHoldingLeft;
+    public bool IsHandColling { get; set; }
 
     private void Awake()
     {
-        _isHoldingRight = false;
-        _isHoldingLeft = false;
         _input = new InputControls();
         _jumpController = gameObject.GetComponent<JumpController>();
     }
@@ -31,7 +27,7 @@ public class InputManager : MonoBehaviour
 
     private void Start()
     {
-        _input.Controls.LeftHand.performed += ctx => StartLeftHand(ctx);   
+        _input.Controls.LeftHand.performed += ctx => StartLeftHand(ctx);
         _input.Controls.LeftHand.canceled += ctx => EndLeftHand(ctx);
         _input.Controls.RightHand.performed += ctx => StartRightHand(ctx);
         _input.Controls.RightHand.canceled += ctx => EndRightHand(ctx);
@@ -39,51 +35,24 @@ public class InputManager : MonoBehaviour
 
     private void StartRightHand(InputAction.CallbackContext context)
     {
-        if (IsRightHandColliding)
-        {
-            _jumpController.GrabRight();
-            _isHoldingRight = true;
-        }
-        else if (!_isHoldingLeft)
-            _jumpController.MoveRight();
+        _jumpController.StartRightAction();
         Debug.Log("Pulso la E");
     }
 
     private void EndRightHand(InputAction.CallbackContext context)
     {
-        if(_isHoldingRight)
-        {
-            _jumpController.ReleaseRight();
-            _isHoldingRight = false;
-        }else
-        {
-            _jumpController.JumpRight();
-        }
-        _jumpController.ResetHorizontalDir();
+        _jumpController.EndRightAction();
+
     }
 
     private void StartLeftHand(InputAction.CallbackContext context)
     {
-        if (IsLeftHandColliding)
-        {
-            _jumpController.GrabLeft();
-            _isHoldingLeft = true;
-        }
-        else if (!_isHoldingRight)
-            _jumpController.MoveLeft();
+        _jumpController.StartLeftAction();
         Debug.Log("Pulso la Q");
     }
 
     private void EndLeftHand(InputAction.CallbackContext context)
     {
-        if(_isHoldingLeft)
-        {
-            _jumpController.ReleaseLeft();
-            _isHoldingLeft = false;
-        }else
-        {
-            _jumpController.JumpLeft();
-        }
-        _jumpController.ResetHorizontalDir();
+        _jumpController.EndLeftAction();
     }
 }

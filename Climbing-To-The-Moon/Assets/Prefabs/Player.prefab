@@ -123,7 +123,7 @@ SpriteRenderer:
   m_Size: {x: 2, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!114 &8029840674605151968
@@ -150,13 +150,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1411753e45504154db50ade585e64f2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  leftHand: {fileID: 2169925547346010346}
-  rightHand: {fileID: 1939450931163994224}
   rotationSpeed: 3.66
   jumpForce: 4
   extraImpulseGrowth: 3
   _maxSpeed: 4
   _horizontalForce: 2.05
+  leftHand: {fileID: 8564180861810716890}
+  rightHand: {fileID: 7130775407276618773}
+  floorLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  floorCheck: {fileID: 0}
+  objectsDisabilitedOnGround: []
 --- !u!50 &9016267182088448969
 Rigidbody2D:
   serializedVersion: 4
@@ -277,6 +282,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2169925547346010346}
   - component: {fileID: 5269463007131468985}
+  - component: {fileID: 8564180861810716890}
   m_Layer: 0
   m_Name: LeftHand
   m_TagString: LeftHand
@@ -334,6 +340,18 @@ CircleCollider2D:
   m_Offset: {x: 0.003911525, y: 0}
   serializedVersion: 2
   m_Radius: 0.24574688
+--- !u!114 &8564180861810716890
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5024419474547917625}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f06139ac496744e4da8c488fd012f9a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5152378071668530313
 GameObject:
   m_ObjectHideFlags: 0
@@ -375,6 +393,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1939450931163994224}
   - component: {fileID: 4731364165897003861}
+  - component: {fileID: 7130775407276618773}
   m_Layer: 0
   m_Name: RightHand
   m_TagString: RightHand
@@ -432,6 +451,18 @@ CircleCollider2D:
   m_Offset: {x: -0.03129278, y: 0}
   serializedVersion: 2
   m_Radius: 0.23401205
+--- !u!114 &7130775407276618773
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6861133991045612543}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f06139ac496744e4da8c488fd012f9a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8300765442956613431
 GameObject:
   m_ObjectHideFlags: 0

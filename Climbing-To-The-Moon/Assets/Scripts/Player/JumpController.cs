@@ -5,14 +5,16 @@ using UnityEngine;
 
 public class JumpController : MonoBehaviour
 {
-    [SerializeField, Range(0f, 10f)] private Transform leftHand, rightHand;
     [SerializeField, Range(0f, 10f)] private float rotationSpeed, jumpForce, extraImpulseGrowth, _maxSpeed;
     [SerializeField, Range(0f, 10f)] private float _horizontalForce;
     private float _baseJumpForce;
     private Rigidbody2D _rb;
     private Animator _animator;
-    bool _grabbedRight, _grabbedLeft;
     private Vector3 _horizontalDirection;
+
+    [Header("Hands")]
+    [SerializeField] private Hand leftHand;
+    [SerializeField] private Hand rightHand;
 
     [Header("GroundChecks")]
     [SerializeField] private LayerMask floorLayer;
@@ -23,8 +25,6 @@ public class JumpController : MonoBehaviour
     void Start()
     {
         _rb = GetComponent<Rigidbody2D>();
-        _grabbedRight = false;
-        _grabbedLeft = false;
         _baseJumpForce = jumpForce;
         _animator = GetComponent<Animator>();
         _horizontalDirection = Vector3.zero;
@@ -33,35 +33,35 @@ public class JumpController : MonoBehaviour
     void FixedUpdate()
     {
         GroundCheck();
-        if(!_grounded)
+        if (!_grounded)
         {
-            if(_grabbedRight && !_grabbedLeft)
+            if (rightHand.IsHandGrabbed == true && leftHand.IsHandGrabbed == false)
             {
                 ResetHorizontalDir();
                 _rb.velocity = new Vector3(0f, 0f, 0f);
                 _rb.gravityScale = 0f;
-                Vector3 _relativePosition = transform.position - rightHand.position;
-                transform.RotateAround(rightHand.position, -Vector3.forward, rotationSpeed);
+                Vector3 _relativePosition = transform.position - rightHand.transform.position;
+                transform.RotateAround(rightHand.transform.position, -Vector3.forward, rotationSpeed);
                 Debug.Log("Giro en torno a la derecha");
             }
-            else if(!_grabbedRight && _grabbedLeft)
+            else if (rightHand.IsHandGrabbed == false && leftHand.IsHandGrabbed == true)
             {
                 ResetHorizontalDir();
                 _rb.velocity = new Vector3(0f, 0f, 0f);
                 _rb.gravityScale = 0f;
-                Vector3 _relativePosition = transform.position - leftHand.position;
-                transform.RotateAround(leftHand.position, Vector3.forward, rotationSpeed);
+                Vector3 _relativePosition = transform.position - leftHand.transform.position;
+                transform.RotateAround(leftHand.transform.position, Vector3.forward, rotationSpeed);
                 Debug.Log("Giro en torno a la izquierda");
             }
-            else if(_grabbedRight && _grabbedLeft)
+            else if (rightHand.IsHandGrabbed == true && leftHand.IsHandGrabbed == true)
             {
                 ResetHorizontalDir();
                 _animator.SetBool("GrabBoth", true);
                 _rb.velocity = new Vector3(0f, 0f, 0f);
                 _rb.gravityScale = 0f;
-                if(jumpForce < 10) jumpForce = jumpForce + extraImpulseGrowth * Time.deltaTime;
+                if (jumpForce < 10) jumpForce = jumpForce + extraImpulseGrowth * Time.deltaTime;
             }
-            else if(!_grabbedRight && !_grabbedLeft)
+            else if (rightHand.IsHandGrabbed == false && leftHand.IsHandGrabbed == false)
             {
                 _rb.gravityScale = 1f;
                 if (_horizontalDirection != Vector3.zero)
@@ -69,50 +69,64 @@ public class JumpController : MonoBehaviour
             }
         }
         if (_rb.velocity.y < -_maxSpeed)
-                _rb.velocity = new Vector3(_rb.velocity.x, -_maxSpeed, 0f);
-            
+            _rb.velocity = new Vector3(_rb.velocity.x, -_maxSpeed, 0f);
 
-            if (_rb.velocity.x > _maxSpeed)
-                _rb.velocity = new Vector3(_maxSpeed, _rb.velocity.y, 0f);
-            else if (_rb.velocity.x < -_maxSpeed)
+
+        if (_rb.velocity.x > _maxSpeed)
+            _rb.velocity = new Vector3(_maxSpeed, _rb.velocity.y, 0f);
+        else if (_rb.velocity.x < -_maxSpeed)
             _rb.velocity = new Vector3(-_maxSpeed, _rb.velocity.y, 0f);
-            
+
 
     }
 
     public void GrabRight()
     {
-        if(!_grounded)
+        if (!_grounded)
         {
             _animator.SetBool("GrabRight", true);
-            _grabbedRight = true;
-        }else{
+            rightHand.IsHandGrabbed = true;
+            leftHand.touchedGrabbableObject.IsBeingGrabbed = true;
+        }
+        else
+        {
             _animator.SetBool("GroundCharging", true);
         }
     }
 
     public void GrabLeft()
     {
-        if(!_grounded)
+        if (!_grounded)
         {
             _animator.SetBool("GrabLeft", true);
-            _grabbedLeft = true;
+            leftHand.IsHandGrabbed = true;
+            leftHand.touchedGrabbableObject.IsBeingGrabbed = true;
         }
     }
 
     public void ReleaseRight()
     {
-        if(!_grounded)
+        if (!_grounded)
         {
-            _grabbedRight = false;
-            if(!_grabbedLeft) 
+            rightHand.IsHandGrabbed = false;
+            if (leftHand.IsHandGrabbed == false)
             {
+                if (rightHand.touchedGrabbableObject != null)
+                    rightHand.touchedGrabbableObject.IsBeingGrabbed = false;
+
                 _rb.AddForce(transform.up * jumpForce, ForceMode2D.Impulse);
                 jumpForce = _baseJumpForce;
             }
+            else
+            {
+                if (rightHand.touchedGrabbableObject != leftHand.touchedGrabbableObject)
+                    if (rightHand.touchedGrabbableObject != null)
+                        rightHand.touchedGrabbableObject.IsBeingGrabbed = false;
+            }
             _animator.SetBool("GrabRight", false);
             _animator.SetBool("GrabBoth", false);
-        }else
+        }
+        else
         {
             Vector2 upVector = transform.up;
             float angleInRadians = 45 * Mathf.Deg2Rad;
@@ -129,12 +143,24 @@ public class JumpController : MonoBehaviour
 
     public void ReleaseLeft()
     {
-        _grabbedLeft = false;
-        if(!_grabbedRight) 
+        leftHand.IsHandGrabbed = false;
+
+        if (rightHand.IsHandGrabbed == false)
         {
+            if (leftHand.touchedGrabbableObject != null)
+                leftHand.touchedGrabbableObject.IsBeingGrabbed = false;
+
             _rb.AddForce(transform.up * jumpForce, ForceMode2D.Impulse);
             jumpForce = _baseJumpForce;
         }
+        else
+        {
+            if (rightHand.touchedGrabbableObject != leftHand.touchedGrabbableObject)
+                if (leftHand.touchedGrabbableObject != null)
+                    leftHand.touchedGrabbableObject.IsBeingGrabbed = false;
+        }
+
+
         _animator.SetBool("GrabLeft", false);
         _animator.SetBool("GrabBoth", false);
 
@@ -142,7 +168,7 @@ public class JumpController : MonoBehaviour
 
     public void JumpRight()
     {
-        if(_grounded)
+        if (_grounded)
         {
             Vector2 upVector = transform.up;
             float angleInRadians = -60 * Mathf.Deg2Rad;
@@ -161,7 +187,7 @@ public class JumpController : MonoBehaviour
 
     public void JumpLeft()
     {
-        if(_grounded)
+        if (_grounded)
         {
             Vector2 upVector = transform.up;
             float angleInRadians = 60 * Mathf.Deg2Rad;
@@ -180,20 +206,24 @@ public class JumpController : MonoBehaviour
 
     public void MoveRight()
     {
-        if(!_grounded)
+        if (!_grounded)
         {
             _horizontalDirection = Vector3.right;
-        }else{
+        }
+        else
+        {
             _animator.SetBool("GroundCharging", true);
         }
     }
 
     public void MoveLeft()
     {
-        if(!_grounded)
+        if (!_grounded)
         {
             _horizontalDirection = Vector3.left;
-        }else{
+        }
+        else
+        {
             _animator.SetBool("GroundCharging", true);
         }
     }
@@ -205,7 +235,7 @@ public class JumpController : MonoBehaviour
 
     private void GroundCheck()
     {
-        if(!_grabbedLeft && !_grabbedRight)
+        if (rightHand.IsHandGrabbed == false && leftHand.IsHandGrabbed == false)
         {
             bool _lastGrounded = _grounded;
 
@@ -234,6 +264,40 @@ public class JumpController : MonoBehaviour
 
             _animator.SetBool("OnAir", !_grounded);
         }
+    }
+
+    public void StartRightAction()
+    {
+        if (rightHand.IsHandColliding == false)
+            MoveRight();
+        else
+            GrabRight();
+    }
+
+    public void StartLeftAction()
+    {
+        if (leftHand.IsHandColliding == false)
+            MoveLeft();
+        else
+            GrabLeft();
+    }
+
+    public void EndRightAction()
+    {
+        if (rightHand.IsHandGrabbed == true)
+            ReleaseRight();
+        else
+            JumpRight();
+        ResetHorizontalDir();
+    }
+
+    public void EndLeftAction()
+    {
+        if (leftHand.IsHandGrabbed == true)
+            ReleaseLeft();
+        else
+            JumpLeft();
+        ResetHorizontalDir();
     }
 
 }
