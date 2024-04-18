@@ -300,5 +300,15 @@ public class JumpController : MonoBehaviour
         ResetHorizontalDir();
     }
 
+    public void ContinueMovement()
+    {
+
+    }
+
+    public void StopMovement()
+    {
+        
+    }
+
 }
 
