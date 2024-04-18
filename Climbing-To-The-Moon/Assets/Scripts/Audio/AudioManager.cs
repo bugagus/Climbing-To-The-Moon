@@ -1,9 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
+
 
 public class AudioManager : MonoBehaviour
 {
+    [SerializeField] private AudioMixer audioMixer;
+
     private static AudioManager instance;
     public static AudioManager Instance
     {
@@ -119,11 +123,12 @@ public class AudioManager : MonoBehaviour
         sfxSource.PlayOneShot(clip, volume);
     }
 
-    public void SetMusicVolume(float volume)
-    {
-        musicSource.volume = volume;
-        musicSource2.volume = volume;
-    }
+    public void MusicController(float musicSlider)
+   {
+    audioMixer.SetFloat("MusicVolume", Mathf.Log10(musicSlider) * 20);
+   }
+
+
     public void SetSfxVolume(float volume)
     {
         sfxSource.volume = volume;
