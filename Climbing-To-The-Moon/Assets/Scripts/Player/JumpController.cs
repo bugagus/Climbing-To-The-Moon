@@ -128,7 +128,13 @@ public class JumpController : MonoBehaviour
         _rb.velocity = new Vector3(0f, 0f, 0f);
         _rb.gravityScale = 0f;
         Vector3 _relativePosition = transform.position - hand.transform.position;
-        transform.RotateAround(hand.transform.position, -Vector3.forward, rotationSpeed);
+        if(hand == rightHand)
+        {
+            transform.RotateAround(hand.transform.position, -Vector3.forward, rotationSpeed);
+        }else if(hand == leftHand)
+        {
+            transform.RotateAround(hand.transform.position, Vector3.forward, rotationSpeed);
+        }
     }
 
     public void Jump(float angle)
