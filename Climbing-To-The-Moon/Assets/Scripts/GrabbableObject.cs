@@ -4,33 +4,10 @@ using UnityEngine;
 
 public class GrabbableObject : MonoBehaviour
 {
-    private InputManager _inputManager;
-    void Awake()
-    {
-        _inputManager = GameObject.FindGameObjectWithTag("Player").GetComponent<InputManager>();
-    }
+    public bool IsBeingGrabbed { get; set; }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    private void Awake()
     {
-        if (other.CompareTag("LeftHand"))
-            _inputManager.IsLeftHandColliding = true;
-        else if (other.CompareTag("RightHand"))
-            _inputManager.IsRightHandColliding = true;
-    }
-
-    private void OnTriggerStay2D(Collider2D other)
-    {
-        if (other.CompareTag("LeftHand"))
-            _inputManager.IsLeftHandColliding = true;
-        else if (other.CompareTag("RightHand"))
-            _inputManager.IsRightHandColliding = true;
-    }
-
-    private void OnTriggerExit2D(Collider2D other)
-    {
-        if (other.CompareTag("LeftHand"))
-            _inputManager.IsLeftHandColliding = false;
-        else if (other.CompareTag("RightHand"))
-            _inputManager.IsRightHandColliding = false;
+        IsBeingGrabbed = false;
     }
 }

@@ -225,6 +225,7 @@ GameObject:
   m_Component:
   - component: {fileID: 757260857}
   - component: {fileID: 757260858}
+  - component: {fileID: 757260859}
   m_Layer: 0
   m_Name: RightHand
   m_TagString: RightHand
@@ -282,6 +283,18 @@ CircleCollider2D:
   m_Offset: {x: -0.03129278, y: 0}
   serializedVersion: 2
   m_Radius: 0.23401205
+--- !u!114 &757260859
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 757260856}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f06139ac496744e4da8c488fd012f9a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &950773160
 GameObject:
   m_ObjectHideFlags: 0
@@ -352,7 +365,7 @@ SpriteRenderer:
   m_Size: {x: 2, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!4 &950773162
@@ -411,13 +424,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1411753e45504154db50ade585e64f2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  leftHand: {fileID: 1430075945}
-  rightHand: {fileID: 757260857}
   rotationSpeed: 3
   jumpForce: 7
   extraImpulseGrowth: 2
   _maxSpeed: 3.05
   _horizontalForce: 2.95
+  leftHand: {fileID: 1430075945}
+  rightHand: {fileID: 757260857}
+  floorLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  floorCheck: {fileID: 0}
+  objectsDisabilitedOnGround: []
 --- !u!114 &950773165
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -461,6 +479,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1430075945}
   - component: {fileID: 1430075946}
+  - component: {fileID: 1430075947}
   m_Layer: 0
   m_Name: LeftHand
   m_TagString: LeftHand
@@ -518,6 +537,18 @@ CircleCollider2D:
   m_Offset: {x: 0.003911525, y: 0}
   serializedVersion: 2
   m_Radius: 0.24574688
+--- !u!114 &1430075947
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1430075944}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f06139ac496744e4da8c488fd012f9a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1711234906
 GameObject:
   m_ObjectHideFlags: 0
@@ -529,10 +560,10 @@ GameObject:
   - component: {fileID: 1711234907}
   - component: {fileID: 1711234910}
   - component: {fileID: 1711234909}
-  - component: {fileID: 1711234908}
+  - component: {fileID: 1711234911}
   m_Layer: 0
   m_Name: Fondo
-  m_TagString: Untagged
+  m_TagString: GrabbableObject
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -552,18 +583,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1711234908
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1711234906}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f06139ac496744e4da8c488fd012f9a2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!61 &1711234909
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -661,6 +680,18 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1711234911
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1711234906}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2cda9247a8088134abb92b95cc37b053, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
