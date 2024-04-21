@@ -8,11 +8,14 @@ public class Hand : MonoBehaviour
     public bool IsHandColliding { get; set; }
     public bool IsHandGrabbed { get; set; }
 
+    
+
     public GrabbableObject touchedGrabbableObject { get; set; }
 
     void Awake()
     {
         _inputManager = GameObject.FindGameObjectWithTag("Player").GetComponent<InputManager>();
+        
     }
 
     private void OnTriggerEnter2D(Collider2D other)

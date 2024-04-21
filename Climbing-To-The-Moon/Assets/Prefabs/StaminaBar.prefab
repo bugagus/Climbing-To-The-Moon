@@ -85,9 +85,10 @@ GameObject:
   m_Component:
   - component: {fileID: 8971006783943196430}
   - component: {fileID: 6792606699850230653}
+  - component: {fileID: 938983046816103152}
   m_Layer: 5
   m_Name: StaminaBar
-  m_TagString: Untagged
+  m_TagString: StaminaBar
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -165,6 +166,23 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &938983046816103152
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2538045275750939839}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52c80fa219055ec439cac94513fde088, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stamina: 100
+  maxStamina: 100
+  increaseStamina: 10
+  decreaseStamina: 10
+  slider: {fileID: 6792606699850230653}
 --- !u!1 &3224125010998897718
 GameObject:
   m_ObjectHideFlags: 0
