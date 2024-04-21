@@ -8,6 +8,8 @@ public struct Word
 {
     [Range(1, 10)] public float xOffset;
     [Range(1, 10)] public float yOffset;
+    [Range(0, 5)] public float speed;
+    [Range(0, 5)] public float amplitude;
 
     public Gradient color;
     public bool wobbleByChar;
