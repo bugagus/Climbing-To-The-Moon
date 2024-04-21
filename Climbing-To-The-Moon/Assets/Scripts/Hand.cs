@@ -39,7 +39,9 @@ public class Hand : MonoBehaviour
     private void OnTriggerExit2D(Collider2D other)
     {
         if (other.CompareTag("GrabbableObject"))
+        {
             IsHandColliding = false;
+        }
         IsHandGrabbed = false;
     }
 }
