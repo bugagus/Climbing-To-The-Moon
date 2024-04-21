@@ -6,37 +6,52 @@ public class OptionsMenu : MonoBehaviour
 {
     [SerializeField] private GameObject pauseButton;
     [SerializeField] private GameObject pauseMenu;
-    private bool pausedGame = false;
+    private bool pausedMenu = false;
+    public Animator mAnimator;
+    [SerializeField] float animDuration;
+    private Coroutine activeEnumerator;
+
+
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if (pausedGame)
-            {
-                Resume();
-            }
-            else
-            {
-                Pause();
-            }
+            Pause();
         }
     }
 
     public void Pause()
     {
-        pausedGame = true;
-        Time.timeScale = 0f;
-        pauseButton.SetActive(false);
-        pauseMenu.SetActive(true);
+        if(activeEnumerator == null)
+        {
+            if (!pausedMenu)
+            {
+                pausedMenu = true;
+                pauseMenu.SetActive(true);
+                mAnimator.SetBool("BOpen", true);
+                activeEnumerator = StartCoroutine(waitTime(true));
+                Debug.Log("Entro primero");
+            }
+            else
+            {
+                pausedMenu = false;
+                mAnimator.SetBool("BOpen", false);
+                activeEnumerator = StartCoroutine(waitTime(false));
+                Debug.Log("Entro segundo");
+            }
+        }
     }
 
-    public void Resume()
+    private IEnumerator waitTime(bool isActive)
     {
-        pausedGame = false;
-        Time.timeScale = 1f;
-        pauseButton.SetActive(true);
-        pauseMenu.SetActive(false);
+        yield return new WaitForSeconds(animDuration);
+        if(isActive != true)
+        {
+            pauseMenu.SetActive(isActive);
+        }
+        activeEnumerator = null;
     }
+
 
     public void closeGame()
     {
