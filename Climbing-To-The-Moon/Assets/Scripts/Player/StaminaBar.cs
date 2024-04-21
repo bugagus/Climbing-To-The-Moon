@@ -5,10 +5,8 @@ using UnityEngine.UI;
 
 public class StaminaBar : MonoBehaviour
 {
-    public float stamina = 100f;
+    public float stamina {get; set;}
     public float maxStamina = 100f;
-    [SerializeField] float increaseStamina;
-    [SerializeField] float decreaseStamina;
     public Slider slider;
 
     void Start()
@@ -19,16 +17,6 @@ public class StaminaBar : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKey(KeyCode.Z))
-        {
-            //Perder stamina
-            discharge();
-        }
-        else if (Input.GetKey(KeyCode.C))
-        {
-            //Recuperar stamina
-            recharge();
-        }
 
         if (stamina <= 0f)
         {
@@ -38,7 +26,7 @@ public class StaminaBar : MonoBehaviour
         slider.value = stamina;
     }
 
-    public void discharge()
+    public void discharge(float increaseStamina)
     {
         if (stamina > 0)
         {
@@ -46,7 +34,7 @@ public class StaminaBar : MonoBehaviour
         }
     }
 
-    public void recharge()
+    public void recharge(float decreaseStamina)
     {
         if (stamina <= maxStamina)
         {

@@ -27,9 +27,10 @@ public class JumpController : MonoBehaviour
     [SerializeField] private GameObject[] objectsDisabilitedOnJetpack;
     [SerializeField, Range(0f, 10f)] private float jetpackVerticalForce, jetpackHorizontalForce;
     private bool _isOnJetpack;
-    
+
 
     private StaminaBar staminaBar;
+    [SerializeField]public float incrStaminaInGround, decrsStamina;
 
     void Awake()
     {
@@ -50,47 +51,45 @@ public class JumpController : MonoBehaviour
         GroundCheck();
         if (!_grounded)
         {
-            if (rightHand.IsHandGrabbed == true && leftHand.IsHandGrabbed == false)
+            if(staminaBar.stamina > 0)
             {
-                Rotate(rightHand);
-                staminaBar.discharge();
-                _animator.SetBool("GrabLeft", false);
-            }
-            else if (rightHand.IsHandGrabbed == false && leftHand.IsHandGrabbed == true)
-            {
-                Rotate(leftHand);
-                staminaBar.discharge();
-                _animator.SetBool("GrabRight", false);
-
-            }
-            else if (rightHand.IsHandGrabbed == true && leftHand.IsHandGrabbed == true)
-            {
-                _animator.SetBool("GrabBoth", true);
-                _rb.velocity = new Vector3(0f, 0f, 0f);
-                _rb.gravityScale = 0f;
-                if (jumpForce < 10) jumpForce = jumpForce + extraImpulseGrowth * Time.deltaTime;
-                staminaBar.discharge();
-            }
-            else if (rightHand.IsHandGrabbed == false && leftHand.IsHandGrabbed == false)
-            {
-                _rb.gravityScale = 1f;
-                if (_finalHorizontalDirection != Vector3.zero)
+                if (rightHand.IsHandGrabbed == true && leftHand.IsHandGrabbed == false)
                 {
-                    if(!_isOnJetpack)
-                    {
-                        _rb.AddForce(_finalHorizontalDirection * _horizontalForce, ForceMode2D.Impulse);
-                    }else
-                    {
-                        _rb.AddForce(_finalHorizontalDirection * _horizontalForce * jetpackHorizontalForce, ForceMode2D.Impulse);
-                    }
+                    Rotate(rightHand);
+                    staminaBar.discharge(decrsStamina);
+                    _animator.SetBool("GrabLeft", false);
                 }
-                _animator.SetBool("GrabRight", false);
-                _animator.SetBool("GrabLeft", false);
-                _animator.SetBool("GrabBoth", false);
+                else if (rightHand.IsHandGrabbed == false && leftHand.IsHandGrabbed == true)
+                {
+                    Rotate(leftHand);
+                    staminaBar.discharge(decrsStamina);
+                    _animator.SetBool("GrabRight", false);
 
-                if (_isOnJetpack)
-                    _rb.AddForce(jetpackVerticalForce * transform.up, ForceMode2D.Force);
+                }
+                else if (rightHand.IsHandGrabbed == true && leftHand.IsHandGrabbed == true)
+                {
+                    _animator.SetBool("GrabBoth", true);
+                    _rb.velocity = new Vector3(0f, 0f, 0f);
+                    _rb.gravityScale = 0f;
+                    if (jumpForce < 10) jumpForce = jumpForce + extraImpulseGrowth * Time.deltaTime;
+                    staminaBar.discharge(decrsStamina);
+                }
+                else if (rightHand.IsHandGrabbed == false && leftHand.IsHandGrabbed == false)
+                {
+                    ActiveGravity();
+
+                    if (_isOnJetpack)
+                        _rb.AddForce(jetpackVerticalForce * transform.up, ForceMode2D.Force);
+                }
             }
+            else
+            {
+                ActiveGravity();
+            }
+        }
+        else
+        {
+            staminaBar.recharge(incrStaminaInGround);
         }
         VelocityConstraints();
 
@@ -154,6 +153,24 @@ public class JumpController : MonoBehaviour
         }
         _animator.SetBool("GrabBoth", false);
 
+    }
+
+    public void ActiveGravity()
+    {
+        _rb.gravityScale = 1f;
+                    if (_finalHorizontalDirection != Vector3.zero)
+                    {
+                        if(!_isOnJetpack)
+                        {
+                            _rb.AddForce(_finalHorizontalDirection * _horizontalForce, ForceMode2D.Impulse);
+                        }else
+                        {
+                            _rb.AddForce(_finalHorizontalDirection * _horizontalForce * jetpackHorizontalForce, ForceMode2D.Impulse);
+                        }
+                    }
+                    _animator.SetBool("GrabRight", false);
+                    _animator.SetBool("GrabLeft", false);
+                    _animator.SetBool("GrabBoth", false);
     }
 
     public void Rotate(Hand hand)
@@ -326,7 +343,7 @@ public class JumpController : MonoBehaviour
 
     public void StopMovement()
     {
-        
+
     }
 
 }

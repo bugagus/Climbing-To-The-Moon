@@ -2775,7 +2775,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5347593847898919819, guid: 3e1e62ef99625c24d92e3fa6f80ca4b1, type: 3}
       propertyPath: m_ConnectedAnchor.y
-      value: -0.5
+      value: -0.49999976
       objectReference: {fileID: 0}
     - target: {fileID: 5751308155011645841, guid: 3e1e62ef99625c24d92e3fa6f80ca4b1, type: 3}
       propertyPath: m_ConnectedAnchor.y
@@ -2815,11 +2815,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8315454628706194256, guid: 3e1e62ef99625c24d92e3fa6f80ca4b1, type: 3}
       propertyPath: m_ConnectedAnchor.y
-      value: 0.5
+      value: 0.49999976
       objectReference: {fileID: 0}
     - target: {fileID: 8700775999959339330, guid: 3e1e62ef99625c24d92e3fa6f80ca4b1, type: 3}
       propertyPath: staminaBar
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8700775999959339330, guid: 3e1e62ef99625c24d92e3fa6f80ca4b1, type: 3}
+      propertyPath: decrsStamina
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 8700775999959339330, guid: 3e1e62ef99625c24d92e3fa6f80ca4b1, type: 3}
+      propertyPath: incrStaminaInGround
+      value: 20
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
