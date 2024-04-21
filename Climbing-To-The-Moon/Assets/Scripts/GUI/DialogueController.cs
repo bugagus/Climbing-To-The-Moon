@@ -37,9 +37,7 @@ public class DialogueController : MonoBehaviour
     public int CurrentLetter { get; private set; }
     private Animator _animator;
     private Coroutine _displayLineCoroutine;
-    private bool _canContinue;
     private bool _isInDialogue;
-    private bool _lineDisplayedCompletely;
     [SerializeField] private GameObject player;
     [SerializeField] private bool stopPlayer;
     [SerializeField] private TextWobble textWobble;
@@ -49,35 +47,28 @@ public class DialogueController : MonoBehaviour
         _currentLine = 0;
         _isInDialogue = false;
         _animator = GetComponent<Animator>();
+        _animator.speed = 1f/animationDuration;
     } 
 
     void Update()
     {
         if (_isInDialogue && Input.GetKeyDown(KeyCode.Space) )
         {
-            //if (_lineDisplayedCompletely && _canContinue)
             NextLine();
-            //else
-            //{
-            //    SkipLine();
-            //}
         }
     }
 
     public void StartDialogue()
     {
-        StartCoroutine(InitiateDialogue());
+        NextLine();
     }
 
     private void NextLine()
     {
-        Debug.Log("VOY A REPRODUCIR UNA LINEA");
         if (_currentLine < displayedLines.Length)
         {
             if (_displayLineCoroutine != null) StopCoroutine(_displayLineCoroutine);
-            _displayLineCoroutine = StartCoroutine(DisplayLine(displayedLines[_currentLine].lineText));
-            DisplayLine(displayedLines[_currentLine].lineText);
-            _currentLine++;
+            _displayLineCoroutine = StartCoroutine(DisplayLine(displayedLines[_currentLine].lineText, _currentLine));
         }
         else
         {
@@ -85,18 +76,25 @@ public class DialogueController : MonoBehaviour
         }
     }
 
-    private IEnumerator DisplayLine(string line)
+    private IEnumerator DisplayLine(string line, int lineIndex)
     {
+        if(lineIndex == 0)
+        {
+            dialogueText.gameObject.SetActive(true);
+            _animator.SetTrigger("Appear");
+        }
         continueIcon.SetActive(false);
-        _canContinue = false;
         dialogueText.text = "";
-        _lineDisplayedCompletely = false; // Restablecer la variable antes de mostrar la línea
 
         dialogueText.text = line;
         dialogueText.alpha = 0;
 
         CurrentLetter = 0;
         List<int> wordLengths = textWobble.UpdateTextState();
+        if(lineIndex == 0)
+        {
+            yield return new WaitForSeconds(animationDuration);
+        }
 
         switch (dialogueTypeMethod)
         {
@@ -121,40 +119,14 @@ public class DialogueController : MonoBehaviour
         }
 
         _isInDialogue = true;
-        _lineDisplayedCompletely = true; // Marcar la línea como mostrada completamente
-        _canContinue = true;
+        _currentLine++;
         continueIcon.SetActive(true);
-    }
-    private IEnumerator InitiateDialogue()
-    {
-        if(stopPlayer)
-        {
-            //player.GetComponent<JumpController>().StopMovement();
-        }
-        _animator.SetTrigger("Appear");
-        yield return new WaitForSeconds(animationDuration);
-        dialogueText.gameObject.SetActive(true);
-        NextLine();
     }
 
     private void FinishDialogue()
     {
-        if(stopPlayer)
-        {
-            //player.GetComponent<JumpController>().ContinueMovement();
-        }
         continueIcon.SetActive(false);
         _animator.SetTrigger("Disappear");
         _isInDialogue = false;
-    }
-
-    private void SkipLine()
-    {
-        Debug.Log("SKIPPEO");
-        StopCoroutine(_displayLineCoroutine); // Detiene la animación de la línea
-        dialogueText.text = displayedLines[_currentLine - 1].lineText; // Muestra la línea completa
-        _lineDisplayedCompletely = true; // Marca la línea como mostrada completamente
-        _canContinue = true; // Permite avanzar
-        continueIcon.SetActive(true); // Muestra el icono de continuar
     }
 }

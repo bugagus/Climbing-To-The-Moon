@@ -563,7 +563,7 @@ Transform:
   m_GameObject: {fileID: 250760499}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.17972665, y: 0.17868358, z: -9.957341}
+  m_LocalPosition: {x: 1.1741387, y: 0.17869359, z: -9.957341}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1056,7 +1056,7 @@ Transform:
   m_GameObject: {fileID: 713187274}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.17988089, y: -3.4696562, z: -9.957341}
+  m_LocalPosition: {x: 1.1742996, y: -3.1576562, z: -9.957341}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2270,6 +2270,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1142607702309346747, guid: 3e1e62ef99625c24d92e3fa6f80ca4b1, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1142607702309346747, guid: 3e1e62ef99625c24d92e3fa6f80ca4b1, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.979
+      objectReference: {fileID: 0}
     - target: {fileID: 1680808741350270782, guid: 3e1e62ef99625c24d92e3fa6f80ca4b1, type: 3}
       propertyPath: m_LocalPosition.y
       value: 0
@@ -2402,6 +2410,14 @@ PrefabInstance:
     - target: {fileID: 1141582813319728913, guid: c8ff95753e35afd4fbc00d7820f5a618, type: 3}
       propertyPath: lines.Array.size
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1141582813319728913, guid: c8ff95753e35afd4fbc00d7820f5a618, type: 3}
+      propertyPath: animationDuration
+      value: 0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 1141582813319728913, guid: c8ff95753e35afd4fbc00d7820f5a618, type: 3}
+      propertyPath: dialogueTypeMethod
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1141582813319728913, guid: c8ff95753e35afd4fbc00d7820f5a618, type: 3}
       propertyPath: lines.Array.data[0]
