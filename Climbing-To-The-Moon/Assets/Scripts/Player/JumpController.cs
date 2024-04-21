@@ -5,12 +5,12 @@ using UnityEngine;
 
 public class JumpController : MonoBehaviour
 {
-    [SerializeField, Range(0f, 10f)] private float rotationSpeed, jumpForce, extraImpulseGrowth, _maxSpeed;
+    [SerializeField, Range(0f, 10f)] private float rotationSpeed, jumpForce, extraImpulseGrowth, maxHorizontalSpeed, maxVerticalSpeed;
     [SerializeField, Range(0f, 10f)] private float _horizontalForce;
     private float _baseJumpForce;
     private Rigidbody2D _rb;
     private Animator _animator;
-    private Vector3 _horizontalDirection;
+    private Vector3 _finalHorizontalDirection, _rightHorizontalDirection, _leftHorizontalDirection;
 
     [Header("Hands")]
     [SerializeField] private Hand leftHand;
@@ -22,12 +22,18 @@ public class JumpController : MonoBehaviour
     [SerializeField] private GameObject[] objectsDisabilitedOnGround;
     private bool _grounded;
 
+    [Header("Jetpack")]
+    [SerializeField] private GameObject[] objectsDisabilitedOnJetpack;
+    [SerializeField, Range(0f, 10f)] private float jetpackVerticalForce, jetpackHorizontalForce;
+    private bool _isOnJetpack;
+    
+
     void Start()
     {
         _rb = GetComponent<Rigidbody2D>();
         _baseJumpForce = jumpForce;
         _animator = GetComponent<Animator>();
-        _horizontalDirection = Vector3.zero;
+        _finalHorizontalDirection = Vector3.zero;
     }
 
     void FixedUpdate()
@@ -45,7 +51,6 @@ public class JumpController : MonoBehaviour
             }
             else if (rightHand.IsHandGrabbed == true && leftHand.IsHandGrabbed == true)
             {
-                ResetHorizontalDir();
                 _animator.SetBool("GrabBoth", true);
                 _rb.velocity = new Vector3(0f, 0f, 0f);
                 _rb.gravityScale = 0f;
@@ -54,8 +59,18 @@ public class JumpController : MonoBehaviour
             else if (rightHand.IsHandGrabbed == false && leftHand.IsHandGrabbed == false)
             {
                 _rb.gravityScale = 1f;
-                if (_horizontalDirection != Vector3.zero)
-                    _rb.AddForce(_horizontalDirection * _horizontalForce, ForceMode2D.Force);
+                if (_finalHorizontalDirection != Vector3.zero)
+                {
+                    if(!_isOnJetpack)
+                    {
+                        _rb.AddForce(_finalHorizontalDirection * _horizontalForce, ForceMode2D.Impulse);
+                    }else
+                    {
+                        _rb.AddForce(_finalHorizontalDirection * _horizontalForce * jetpackHorizontalForce, ForceMode2D.Impulse);
+                    }
+                }
+                if(_isOnJetpack)
+                    _rb.AddForce(jetpackVerticalForce * transform.up, ForceMode2D.Force);
             }
         }
         VelocityConstraints();
@@ -124,10 +139,10 @@ public class JumpController : MonoBehaviour
 
     public void Rotate(Hand hand)
     {
-        ResetHorizontalDir();
         _rb.velocity = new Vector3(0f, 0f, 0f);
+        _rb.totalForce = Vector3.zero;
+        _rb.totalTorque = 0f;
         _rb.gravityScale = 0f;
-        Vector3 _relativePosition = transform.position - hand.transform.position;
         if(hand == rightHand)
         {
             transform.RotateAround(hand.transform.position, -Vector3.forward, rotationSpeed);
@@ -152,25 +167,19 @@ public class JumpController : MonoBehaviour
             direction.x = direction.x * 0.5f;
             _rb.AddForce(direction * jumpForce, ForceMode2D.Impulse);
             jumpForce = _baseJumpForce;
-            _animator.SetBool("GroundCharging", false);
         }
     }
 
-    public void Move(Vector3 direction)
+    public void Move()
     {
         if (!_grounded)
         {
-            _horizontalDirection = direction;
+            _finalHorizontalDirection = _rightHorizontalDirection + _leftHorizontalDirection;
         }
         else
         {
             _animator.SetBool("GroundCharging", true);
         }
-    }
-
-    public void ResetHorizontalDir()
-    {
-        _horizontalDirection = Vector3.zero;
     }
 
     private void GroundCheck()
@@ -186,7 +195,8 @@ public class JumpController : MonoBehaviour
 
             if (!_lastGrounded && _grounded)
             {
-                // Si viene del aire y toca el suelo
+                _animator.SetBool("OnAir", false);
+                _finalHorizontalDirection = Vector3.zero;
                 _rb.velocity = Vector2.zero;
                 foreach (GameObject obj in objectsDisabilitedOnGround)
                 {
@@ -196,30 +206,41 @@ public class JumpController : MonoBehaviour
             }
             else if (_lastGrounded && !_grounded)
             {
+                _animator.SetBool("OnAir", true);
+                _animator.SetBool("GroundCharging", false);
                 foreach (GameObject obj in objectsDisabilitedOnGround)
                 {
                     obj.SetActive(true);
                 }
             }
-
-            _animator.SetBool("OnAir", !_grounded);
         }
     }
 
     public void StartRightAction()
     {
         if (rightHand.IsHandColliding == false)
-            Move(Vector3.right);
+        {
+            _rightHorizontalDirection = Vector3.right;
+            Debug.Log("Me muevo");
+            Move();
+        }
         else
+        {
             Grab(rightHand);
+        }
     }
 
     public void StartLeftAction()
     {
         if (leftHand.IsHandColliding == false)
-            Move(Vector3.left);
+        {
+            _leftHorizontalDirection = Vector3.left;
+            Move();
+        }
         else
+        {
             Grab(leftHand);
+        }
     }
 
     public void EndRightAction()
@@ -228,7 +249,8 @@ public class JumpController : MonoBehaviour
             Release(rightHand);
         else
             Jump(-60);
-        ResetHorizontalDir();
+        _rightHorizontalDirection = Vector3.zero;
+        Move();
     }
 
     public void EndLeftAction()
@@ -237,23 +259,45 @@ public class JumpController : MonoBehaviour
             Release(leftHand);
         else
             Jump(60);
-        ResetHorizontalDir();
+        _leftHorizontalDirection = Vector3.zero;
+        Move();
     }
 
     public void VelocityConstraints()
     {
-        if (_rb.velocity.y < -_maxSpeed)
+        if (_rb.velocity.y < -maxVerticalSpeed)
         {
-            _rb.velocity = new Vector3(_rb.velocity.x, -_maxSpeed, 0f);
-        }
-        if (_rb.velocity.x > _maxSpeed)
+            _rb.velocity = new Vector3(_rb.velocity.x, - maxVerticalSpeed, 0f);
+        }else if(_rb.velocity.y > maxVerticalSpeed)
         {
-            _rb.velocity = new Vector3(_maxSpeed, _rb.velocity.y, 0f);
+            _rb.velocity = new Vector3(_rb.velocity.x, maxVerticalSpeed, 0f);
         }
-        else if (_rb.velocity.x < -_maxSpeed)
+        if (_rb.velocity.x > maxHorizontalSpeed)
         {
-            _rb.velocity = new Vector3(-_maxSpeed, _rb.velocity.y, 0f);
+            _rb.velocity = new Vector3(maxHorizontalSpeed, _rb.velocity.y, 0f);
         }
+        else if (_rb.velocity.x < - maxHorizontalSpeed)
+        {
+            _rb.velocity = new Vector3(-maxHorizontalSpeed, _rb.velocity.y, 0f);
+        }
+    }
+
+    public void StartJetpack()
+    {
+        foreach(GameObject obj in objectsDisabilitedOnJetpack)
+        {
+            obj.SetActive(false);
+        }
+        _isOnJetpack = true;
+    }
+
+    public void EndJetpack()
+    {
+        foreach(GameObject obj in objectsDisabilitedOnJetpack)
+        {
+            obj.SetActive(true);
+        }
+        _isOnJetpack = false;
     }
 
     public void ContinueMovement()
