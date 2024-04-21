@@ -22,6 +22,13 @@ public class JumpController : MonoBehaviour
     [SerializeField] private GameObject[] objectsDisabilitedOnGround;
     private bool _grounded;
 
+    private StaminaBar staminaBar;
+
+    void Awake()
+    {
+        staminaBar = GameObject.FindGameObjectWithTag("StaminaBar").GetComponent<StaminaBar>();
+    }
+
     void Start()
     {
         _rb = GetComponent<Rigidbody2D>();
@@ -35,13 +42,16 @@ public class JumpController : MonoBehaviour
         GroundCheck();
         if (!_grounded)
         {
+            
             if (rightHand.IsHandGrabbed == true && leftHand.IsHandGrabbed == false)
             {
                 Rotate(rightHand);
+                staminaBar.discharge();
             }
             else if (rightHand.IsHandGrabbed == false && leftHand.IsHandGrabbed == true)
             {
                 Rotate(leftHand);
+                staminaBar.discharge();
             }
             else if (rightHand.IsHandGrabbed == true && leftHand.IsHandGrabbed == true)
             {
@@ -50,6 +60,7 @@ public class JumpController : MonoBehaviour
                 _rb.velocity = new Vector3(0f, 0f, 0f);
                 _rb.gravityScale = 0f;
                 if (jumpForce < 10) jumpForce = jumpForce + extraImpulseGrowth * Time.deltaTime;
+                staminaBar.discharge();
             }
             else if (rightHand.IsHandGrabbed == false && leftHand.IsHandGrabbed == false)
             {
