@@ -2396,12 +2396,24 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2039242022}
     - target: {fileID: 1141582813319728913, guid: c8ff95753e35afd4fbc00d7820f5a618, type: 3}
+      propertyPath: _typeByWord
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1141582813319728913, guid: c8ff95753e35afd4fbc00d7820f5a618, type: 3}
+      propertyPath: typingSpeed
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1141582813319728913, guid: c8ff95753e35afd4fbc00d7820f5a618, type: 3}
       propertyPath: _currentLine
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1141582813319728913, guid: c8ff95753e35afd4fbc00d7820f5a618, type: 3}
       propertyPath: lines.Array.size
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1141582813319728913, guid: c8ff95753e35afd4fbc00d7820f5a618, type: 3}
+      propertyPath: dialogueTypeMethod
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1141582813319728913, guid: c8ff95753e35afd4fbc00d7820f5a618, type: 3}
       propertyPath: lines.Array.data[0]
@@ -2445,7 +2457,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1141582813319728913, guid: c8ff95753e35afd4fbc00d7820f5a618, type: 3}
       propertyPath: displayedLines.Array.data[1].lineText
-      value: Soy yo el Rafa
+      value: Soy yo, el Rafa
       objectReference: {fileID: 0}
     - target: {fileID: 1141582813319728913, guid: c8ff95753e35afd4fbc00d7820f5a618, type: 3}
       propertyPath: displayedLines.Array.data[2].lineText
@@ -2512,6 +2524,22 @@ PrefabInstance:
       value: 54.8
       objectReference: {fileID: 0}
     - target: {fileID: 1141582813319728913, guid: c8ff95753e35afd4fbc00d7820f5a618, type: 3}
+      propertyPath: displayedLines.Array.data[0].words.Array.data[3].xOffset
+      value: 4.99
+      objectReference: {fileID: 0}
+    - target: {fileID: 1141582813319728913, guid: c8ff95753e35afd4fbc00d7820f5a618, type: 3}
+      propertyPath: displayedLines.Array.data[0].words.Array.data[3].yOffset
+      value: 2.69
+      objectReference: {fileID: 0}
+    - target: {fileID: 1141582813319728913, guid: c8ff95753e35afd4fbc00d7820f5a618, type: 3}
+      propertyPath: displayedLines.Array.data[2].words.Array.data[0].xOffset
+      value: 4.88
+      objectReference: {fileID: 0}
+    - target: {fileID: 1141582813319728913, guid: c8ff95753e35afd4fbc00d7820f5a618, type: 3}
+      propertyPath: displayedLines.Array.data[2].words.Array.data[0].yOffset
+      value: 3.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1141582813319728913, guid: c8ff95753e35afd4fbc00d7820f5a618, type: 3}
       propertyPath: displayedLines.Array.data[0].words.Array.data[0].color.atime1
       value: 65535
       objectReference: {fileID: 0}
@@ -2541,7 +2569,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1141582813319728913, guid: c8ff95753e35afd4fbc00d7820f5a618, type: 3}
       propertyPath: displayedLines.Array.data[0].words.Array.data[0].color.key1.b
-      value: 0
+      value: 0.10509062
       objectReference: {fileID: 0}
     - target: {fileID: 1141582813319728913, guid: c8ff95753e35afd4fbc00d7820f5a618, type: 3}
       propertyPath: displayedLines.Array.data[0].words.Array.data[0].color.key1.g
@@ -2549,6 +2577,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1141582813319728913, guid: c8ff95753e35afd4fbc00d7820f5a618, type: 3}
       propertyPath: displayedLines.Array.data[0].words.Array.data[0].color.key1.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1141582813319728913, guid: c8ff95753e35afd4fbc00d7820f5a618, type: 3}
+      propertyPath: displayedLines.Array.data[0].words.Array.data[0].color.m_Mode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1141582813319728913, guid: c8ff95753e35afd4fbc00d7820f5a618, type: 3}
+      propertyPath: displayedLines.Array.data[0].words.Array.data[0].wobbleByChar
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1141582813319728913, guid: c8ff95753e35afd4fbc00d7820f5a618, type: 3}
@@ -2644,6 +2680,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1141582813319728913, guid: c8ff95753e35afd4fbc00d7820f5a618, type: 3}
+      propertyPath: displayedLines.Array.data[0].words.Array.data[2].wobbleByChar
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1141582813319728913, guid: c8ff95753e35afd4fbc00d7820f5a618, type: 3}
       propertyPath: displayedLines.Array.data[0].words.Array.data[3].color.atime0
       value: 0
       objectReference: {fileID: 0}
@@ -2660,12 +2700,40 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1141582813319728913, guid: c8ff95753e35afd4fbc00d7820f5a618, type: 3}
+      propertyPath: displayedLines.Array.data[0].words.Array.data[3].color.key0.b
+      value: 0.14361954
+      objectReference: {fileID: 0}
+    - target: {fileID: 1141582813319728913, guid: c8ff95753e35afd4fbc00d7820f5a618, type: 3}
+      propertyPath: displayedLines.Array.data[0].words.Array.data[3].color.key0.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1141582813319728913, guid: c8ff95753e35afd4fbc00d7820f5a618, type: 3}
+      propertyPath: displayedLines.Array.data[0].words.Array.data[3].color.key0.r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1141582813319728913, guid: c8ff95753e35afd4fbc00d7820f5a618, type: 3}
       propertyPath: displayedLines.Array.data[0].words.Array.data[3].color.key1.a
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1141582813319728913, guid: c8ff95753e35afd4fbc00d7820f5a618, type: 3}
+      propertyPath: displayedLines.Array.data[0].words.Array.data[3].color.key1.b
+      value: 0.00427413
+      objectReference: {fileID: 0}
+    - target: {fileID: 1141582813319728913, guid: c8ff95753e35afd4fbc00d7820f5a618, type: 3}
+      propertyPath: displayedLines.Array.data[0].words.Array.data[3].color.key1.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1141582813319728913, guid: c8ff95753e35afd4fbc00d7820f5a618, type: 3}
+      propertyPath: displayedLines.Array.data[0].words.Array.data[3].color.key1.r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1141582813319728913, guid: c8ff95753e35afd4fbc00d7820f5a618, type: 3}
       propertyPath: displayedLines.Array.data[0].words.Array.data[3].color.m_Mode
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1141582813319728913, guid: c8ff95753e35afd4fbc00d7820f5a618, type: 3}
+      propertyPath: displayedLines.Array.data[0].words.Array.data[3].wobbleByChar
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1141582813319728913, guid: c8ff95753e35afd4fbc00d7820f5a618, type: 3}
       propertyPath: displayedLines.Array.data[1].words.Array.data[0].color.atime1
@@ -2697,6 +2765,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1141582813319728913, guid: c8ff95753e35afd4fbc00d7820f5a618, type: 3}
       propertyPath: displayedLines.Array.data[1].words.Array.data[1].color.key1.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1141582813319728913, guid: c8ff95753e35afd4fbc00d7820f5a618, type: 3}
+      propertyPath: displayedLines.Array.data[1].words.Array.data[1].wobbleByChar
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1141582813319728913, guid: c8ff95753e35afd4fbc00d7820f5a618, type: 3}
@@ -2745,6 +2817,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1141582813319728913, guid: c8ff95753e35afd4fbc00d7820f5a618, type: 3}
       propertyPath: displayedLines.Array.data[2].words.Array.data[0].color.key1.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1141582813319728913, guid: c8ff95753e35afd4fbc00d7820f5a618, type: 3}
+      propertyPath: displayedLines.Array.data[2].words.Array.data[0].wobbleByChar
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1141582813319728913, guid: c8ff95753e35afd4fbc00d7820f5a618, type: 3}
