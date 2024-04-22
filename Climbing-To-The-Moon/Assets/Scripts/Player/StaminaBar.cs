@@ -6,12 +6,13 @@ using UnityEngine.UI;
 public class StaminaBar : MonoBehaviour
 {
     public float stamina {get; set;}
-    public float maxStamina = 100f;
+    [SerializeField, Range(0f, 100f)] public float maxStamina;
     public Slider slider;
 
     void Start()
     {
         slider.value = maxStamina;
+        stamina = maxStamina;  
     }
 
 

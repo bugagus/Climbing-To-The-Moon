@@ -56,13 +56,11 @@ public class JumpController : MonoBehaviour
                 if (rightHand.IsHandGrabbed == true && leftHand.IsHandGrabbed == false)
                 {
                     Rotate(rightHand);
-                    staminaBar.discharge(decrsStamina);
                     _animator.SetBool("GrabLeft", false);
                 }
                 else if (rightHand.IsHandGrabbed == false && leftHand.IsHandGrabbed == true)
                 {
                     Rotate(leftHand);
-                    staminaBar.discharge(decrsStamina);
                     _animator.SetBool("GrabRight", false);
 
                 }
@@ -72,7 +70,6 @@ public class JumpController : MonoBehaviour
                     _rb.velocity = new Vector3(0f, 0f, 0f);
                     _rb.gravityScale = 0f;
                     if (jumpForce < 10) jumpForce = jumpForce + extraImpulseGrowth * Time.deltaTime;
-                    staminaBar.discharge(decrsStamina);
                 }
                 else if (rightHand.IsHandGrabbed == false && leftHand.IsHandGrabbed == false)
                 {
@@ -97,7 +94,7 @@ public class JumpController : MonoBehaviour
 
     public void Grab(Hand hand)
     {
-        if (!_grounded)
+        if (!_grounded && staminaBar.stamina > 0)
         {
             if(hand == leftHand)
             {
