@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class JumpController : MonoBehaviour
 {
-    [SerializeField, Range(0f, 10f)] private float rotationSpeed, verticalJumpForce, horizontalJumpForce, extraImpulseGrowth;
+    [SerializeField, Range(0f, 10f)] private float rotationSpeed, verticalJumpForce, horizontalJumpForce, extraImpulseGrowth, maxFallSpeed;
     [SerializeField, Range(0f, 10f)] private float _horizontalForce;
     private float _baseVerticalJumpForce, _baseHorizontalJumpForce;
     private Rigidbody2D _rb;
@@ -97,6 +97,7 @@ public class JumpController : MonoBehaviour
         {
             staminaBar.recharge(incrStaminaInGround);
         }
+        VelocityConstraints();
 
     }
 
@@ -325,6 +326,14 @@ public class JumpController : MonoBehaviour
             obj.SetActive(true);
         }
         _isOnJetpack = false;
+    }
+
+    private void VelocityConstraints()
+    {
+        if(_rb.velocity.y < -maxFallSpeed)
+        {
+            _rb.velocity = new Vector2(_rb.velocity.x, -maxFallSpeed);
+        }
     }
 
     public void ContinueMovement()
