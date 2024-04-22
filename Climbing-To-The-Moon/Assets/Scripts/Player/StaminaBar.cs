@@ -27,19 +27,30 @@ public class StaminaBar : MonoBehaviour
         slider.value = stamina;
     }
 
-    public void discharge(float increaseStamina)
+    public void discharge(float decreaseStamina)
     {
         if (stamina > 0)
         {
-            stamina -= increaseStamina * Time.deltaTime;
+            stamina -= decreaseStamina * Time.deltaTime;
         }
     }
 
-    public void recharge(float decreaseStamina)
+    public void recharge(float increaseStamina)
     {
         if (stamina <= maxStamina)
         {
-            stamina += decreaseStamina * Time.deltaTime;
+            stamina += increaseStamina * Time.deltaTime;
         }
+    }
+    
+    public void dischargeNoTime(float decreaseStamina)
+    {
+        if (stamina <= maxStamina)
+        {
+            stamina -= decreaseStamina;
+            if (stamina < 0f)
+                stamina = 0f;
+        }
+
     }
 }

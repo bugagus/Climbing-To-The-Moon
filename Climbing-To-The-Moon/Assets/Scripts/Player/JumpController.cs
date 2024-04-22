@@ -346,5 +346,10 @@ public class JumpController : MonoBehaviour
 
     }
 
+    public void ReleaseBoth()
+    {
+        EndRightAction();
+        EndLeftAction();
+    }
 }
 
