@@ -15,6 +15,6 @@ EditorBuildSettings:
     path: Assets/Scenes/Main.unity
     guid: abf4b30d691948443a622107df385e8e
   - enabled: 1
-    path: Assets/Scenes/Agustin 1.unity
+    path: Assets/Scenes/Sergio.unity
     guid: 0f6d579d185427e4f892eb597bd3f1ca
   m_configObjects: {}
