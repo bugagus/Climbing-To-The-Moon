@@ -291,7 +291,7 @@ Transform:
   m_GameObject: {fileID: 250760499}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.17417422, y: 0.17868358, z: -10.057516}
+  m_LocalPosition: {x: 0.17431644, y: 0.17868365, z: -10.057516}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -611,7 +611,7 @@ Transform:
   m_GameObject: {fileID: 713187274}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.17429963, y: -3.0566564, z: -10.057516}
+  m_LocalPosition: {x: 0.17429963, y: 0.023343638, z: -10.057516}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -760,7 +760,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3245616131320642893, guid: 3e1e62ef99625c24d92e3fa6f80ca4b1, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3.31
+      value: -0.23
       objectReference: {fileID: 0}
     - target: {fileID: 3245616131320642893, guid: 3e1e62ef99625c24d92e3fa6f80ca4b1, type: 3}
       propertyPath: m_LocalPosition.z
@@ -798,6 +798,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerObject
       objectReference: {fileID: 0}
+    - target: {fileID: 5347593847898919819, guid: 3e1e62ef99625c24d92e3fa6f80ca4b1, type: 3}
+      propertyPath: m_ConnectedAnchor.y
+      value: -0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 5841749658571801113, guid: 3e1e62ef99625c24d92e3fa6f80ca4b1, type: 3}
       propertyPath: objectToFollow
       value: 
@@ -805,6 +809,10 @@ PrefabInstance:
     - target: {fileID: 6258816020025117112, guid: 3e1e62ef99625c24d92e3fa6f80ca4b1, type: 3}
       propertyPath: m_Enabled
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8315454628706194256, guid: 3e1e62ef99625c24d92e3fa6f80ca4b1, type: 3}
+      propertyPath: m_ConnectedAnchor.y
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 8700775999959339330, guid: 3e1e62ef99625c24d92e3fa6f80ca4b1, type: 3}
       propertyPath: legs
