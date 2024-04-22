@@ -457,7 +457,7 @@ Transform:
   m_GameObject: {fileID: 250760499}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.17426798, y: 0.17868358, z: -10.057516}
+  m_LocalPosition: {x: 0.17428374, y: 0.17868358, z: -10.057516}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1486,7 +1486,6 @@ GameObject:
   - component: {fileID: 1353589759}
   - component: {fileID: 1353589761}
   - component: {fileID: 1353589762}
-  - component: {fileID: 1353589763}
   - component: {fileID: 1353589764}
   m_Layer: 0
   m_Name: Button_2
@@ -1635,19 +1634,6 @@ MonoBehaviour:
   _health: 3.12
   _decreaseHealth: 1
   _increaseHealth: 1
---- !u!114 &1353589763
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1353589756}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a712a51e754bc245abb07bb8a9a65cc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _timeBetweenElectricity: 0
 --- !u!95 &1353589764
 Animator:
   serializedVersion: 5
@@ -2602,6 +2588,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _timeBetweenElectricity: 1
+  _stunTime: 0
 --- !u!95 &1960720556
 Animator:
   serializedVersion: 5
@@ -2652,7 +2639,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0.012612581, y: -0.012096643}
