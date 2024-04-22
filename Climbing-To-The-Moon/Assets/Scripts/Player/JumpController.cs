@@ -5,9 +5,9 @@ using UnityEngine;
 
 public class JumpController : MonoBehaviour
 {
-    [SerializeField, Range(0f, 10f)] private float rotationSpeed, jumpForce, extraImpulseGrowth, maxHorizontalSpeed, maxVerticalSpeed;
+    [SerializeField, Range(0f, 10f)] private float rotationSpeed, verticalJumpForce, horizontalJumpForce, extraImpulseGrowth, maxFallSpeed;
     [SerializeField, Range(0f, 10f)] private float _horizontalForce;
-    private float _baseJumpForce;
+    private float _baseVerticalJumpForce, _baseHorizontalJumpForce;
     private Rigidbody2D _rb;
     private Animator _animator;
     private Vector3 _finalHorizontalDirection, _rightHorizontalDirection, _leftHorizontalDirection;
@@ -41,7 +41,8 @@ public class JumpController : MonoBehaviour
     void Start()
     {
         _rb = GetComponent<Rigidbody2D>();
-        _baseJumpForce = jumpForce;
+        _baseHorizontalJumpForce = horizontalJumpForce;
+        _baseVerticalJumpForce = verticalJumpForce;
         _animator = GetComponent<Animator>();
         _finalHorizontalDirection = Vector3.zero;
     }
@@ -69,18 +70,26 @@ public class JumpController : MonoBehaviour
                     _animator.SetBool("GrabBoth", true);
                     _rb.velocity = new Vector3(0f, 0f, 0f);
                     _rb.gravityScale = 0f;
-                    if (jumpForce < 10) jumpForce = jumpForce + extraImpulseGrowth * Time.deltaTime;
+                    if (verticalJumpForce < 10) verticalJumpForce = verticalJumpForce + extraImpulseGrowth * Time.deltaTime;
+                    if (horizontalJumpForce < 10) horizontalJumpForce = horizontalJumpForce + extraImpulseGrowth * Time.deltaTime;
                 }
                 else if (rightHand.IsHandGrabbed == false && leftHand.IsHandGrabbed == false)
                 {
+                    AirControl();
                     ActiveGravity();
-
+                    _animator.SetBool("GrabRight", false);
+                    _animator.SetBool("GrabLeft", false);
+                    _animator.SetBool("GrabBoth", false);
                     if (_isOnJetpack)
                         _rb.AddForce(jetpackVerticalForce * transform.up, ForceMode2D.Force);
                 }
             }
             else
             {
+                _animator.SetBool("GrabRight", false);
+                _animator.SetBool("GrabLeft", false);
+                _animator.SetBool("GrabBoth", false);
+                AirControl();
                 ActiveGravity();
             }
         }
@@ -129,9 +138,12 @@ public class JumpController : MonoBehaviour
         {
             if (releasedHand.touchedGrabbableObject != null)
                 releasedHand.touchedGrabbableObject.IsBeingGrabbed = false;
-
-            _rb.AddForce(transform.up * jumpForce, ForceMode2D.Impulse);
-            jumpForce = _baseJumpForce;
+            Vector2 direction = transform.up;
+            direction.y = direction.y * verticalJumpForce;
+            direction.x = direction.x * horizontalJumpForce;
+            _rb.AddForce(direction, ForceMode2D.Impulse);
+            horizontalJumpForce = _baseHorizontalJumpForce;
+            verticalJumpForce = _baseVerticalJumpForce;
         }
         else
         {
@@ -152,22 +164,24 @@ public class JumpController : MonoBehaviour
 
     }
 
+    public void AirControl()
+    {
+        if (_finalHorizontalDirection != Vector3.zero)
+        {
+            if (!_isOnJetpack)
+            {
+                _rb.AddForce(_finalHorizontalDirection * _horizontalForce, ForceMode2D.Impulse);
+            }
+            else
+            {
+                _rb.AddForce(_finalHorizontalDirection * _horizontalForce * jetpackHorizontalForce, ForceMode2D.Impulse);
+            }
+        }
+    }
+
     public void ActiveGravity()
     {
         _rb.gravityScale = 1f;
-                    if (_finalHorizontalDirection != Vector3.zero)
-                    {
-                        if(!_isOnJetpack)
-                        {
-                            _rb.AddForce(_finalHorizontalDirection * _horizontalForce, ForceMode2D.Impulse);
-                        }else
-                        {
-                            _rb.AddForce(_finalHorizontalDirection * _horizontalForce * jetpackHorizontalForce, ForceMode2D.Impulse);
-                        }
-                    }
-                    _animator.SetBool("GrabRight", false);
-                    _animator.SetBool("GrabLeft", false);
-                    _animator.SetBool("GrabBoth", false);
     }
 
     public void Rotate(Hand hand)
@@ -196,10 +210,11 @@ public class JumpController : MonoBehaviour
                 Mathf.Sin(angleInRadians) * upVector.x + Mathf.Cos(angleInRadians) * upVector.y
             );
             direction.Normalize();
-            direction.y = direction.y * 1.5f;
-            direction.x = direction.x * 0.5f;
-            _rb.AddForce(direction * jumpForce, ForceMode2D.Impulse);
-            jumpForce = _baseJumpForce;
+            horizontalJumpForce = _baseHorizontalJumpForce;
+            verticalJumpForce = _baseVerticalJumpForce;
+            direction.y = direction.y * verticalJumpForce * 1.5f;
+            direction.x = direction.x * horizontalJumpForce * 0.75f;
+            _rb.AddForce(direction, ForceMode2D.Impulse);
         }
     }
 
@@ -295,26 +310,6 @@ public class JumpController : MonoBehaviour
         _leftHorizontalDirection = Vector3.zero;
         Move();
     }
-
-    public void VelocityConstraints()
-    {
-        if (_rb.velocity.y < -maxVerticalSpeed)
-        {
-            _rb.velocity = new Vector3(_rb.velocity.x, - maxVerticalSpeed, 0f);
-        }else if(_rb.velocity.y > maxVerticalSpeed)
-        {
-            _rb.velocity = new Vector3(_rb.velocity.x, maxVerticalSpeed, 0f);
-        }
-        if (_rb.velocity.x > maxHorizontalSpeed)
-        {
-            _rb.velocity = new Vector3(maxHorizontalSpeed, _rb.velocity.y, 0f);
-        }
-        else if (_rb.velocity.x < - maxHorizontalSpeed)
-        {
-            _rb.velocity = new Vector3(-maxHorizontalSpeed, _rb.velocity.y, 0f);
-        }
-    }
-
     public void StartJetpack()
     {
         foreach(GameObject obj in objectsDisabilitedOnJetpack)
@@ -331,6 +326,14 @@ public class JumpController : MonoBehaviour
             obj.SetActive(true);
         }
         _isOnJetpack = false;
+    }
+
+    private void VelocityConstraints()
+    {
+        if(_rb.velocity.y < -maxFallSpeed)
+        {
+            _rb.velocity = new Vector2(_rb.velocity.x, -maxFallSpeed);
+        }
     }
 
     public void ContinueMovement()

@@ -921,6 +921,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectToFollow: {fileID: 0}
+  YOffset: 0
+  XOffset: 0
+  ZOffset: 0
 --- !u!1 &2465123542886038145
 GameObject:
   m_ObjectHideFlags: 0
@@ -1491,7 +1494,7 @@ HingeJoint2D:
   m_BreakAction: 3
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 0, y: 0}
-  m_ConnectedAnchor: {x: 0, y: -0.49999994}
+  m_ConnectedAnchor: {x: 0, y: -0.49999976}
   m_UseMotor: 0
   m_Motor:
     m_MotorSpeed: 0
@@ -2060,7 +2063,7 @@ HingeJoint2D:
   m_BreakAction: 3
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 0, y: 0}
-  m_ConnectedAnchor: {x: 0, y: 0.49999994}
+  m_ConnectedAnchor: {x: 0, y: 0.49999976}
   m_UseMotor: 0
   m_Motor:
     m_MotorSpeed: 0
@@ -2195,6 +2198,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectToFollow: {fileID: 0}
+  YOffset: -6
+  XOffset: 0
+  ZOffset: 0
 --- !u!1 &7998292202088786367
 GameObject:
   m_ObjectHideFlags: 0
@@ -2273,7 +2279,7 @@ HingeJoint2D:
   m_BreakAction: 3
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 0, y: 0}
-  m_ConnectedAnchor: {x: 0, y: -0.50000024}
+  m_ConnectedAnchor: {x: 0, y: -0.5}
   m_UseMotor: 0
   m_Motor:
     m_MotorSpeed: 0
@@ -2514,7 +2520,7 @@ HingeJoint2D:
   m_BreakAction: 3
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 0, y: 0}
-  m_ConnectedAnchor: {x: 0, y: 0.50000024}
+  m_ConnectedAnchor: {x: 0, y: 0.5}
   m_UseMotor: 0
   m_Motor:
     m_MotorSpeed: 0

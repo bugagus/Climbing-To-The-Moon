@@ -1068,7 +1068,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2970568007404473071
 Transform:
   m_ObjectHideFlags: 0
@@ -1191,7 +1191,7 @@ PrefabInstance:
     - target: {fileID: 5553505788274135459, guid: f0fa27dd60d3fd24daf2589926ca4a5a, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: -470105758, guid: d202c93b9fe323c46b9bf2d57b135f26, type: 3}
+      objectReference: {fileID: 21300000, guid: 16c43c5b0d4f695459d6297d5a912209, type: 3}
     - target: {fileID: 5553505788274135459, guid: f0fa27dd60d3fd24daf2589926ca4a5a, type: 3}
       propertyPath: m_SortingOrder
       value: 3
@@ -1209,6 +1209,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1680808741350270782}
     - target: {fileID: 7619297623774679180, guid: f0fa27dd60d3fd24daf2589926ca4a5a, type: 3}
+      propertyPath: decrsStamina
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7619297623774679180, guid: f0fa27dd60d3fd24daf2589926ca4a5a, type: 3}
       propertyPath: _horizontalForce
       value: 0.1
       objectReference: {fileID: 0}
@@ -1221,8 +1225,20 @@ PrefabInstance:
       value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 7619297623774679180, guid: f0fa27dd60d3fd24daf2589926ca4a5a, type: 3}
+      propertyPath: verticalJumpForce
+      value: 4.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 7619297623774679180, guid: f0fa27dd60d3fd24daf2589926ca4a5a, type: 3}
       propertyPath: maxHorizontalSpeed
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7619297623774679180, guid: f0fa27dd60d3fd24daf2589926ca4a5a, type: 3}
+      propertyPath: horizontalJumpForce
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7619297623774679180, guid: f0fa27dd60d3fd24daf2589926ca4a5a, type: 3}
+      propertyPath: incrStaminaInGround
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 7619297623774679180, guid: f0fa27dd60d3fd24daf2589926ca4a5a, type: 3}
       propertyPath: jetpackVerticalForce
@@ -1425,7 +1441,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6477713225613618966, guid: 103b66527ff1d9c4e9a16ad198ba6862, type: 3}
       propertyPath: m_ConnectedAnchor.y
-      value: -0.5
+      value: -0.49999976
       objectReference: {fileID: 0}
     - target: {fileID: 6630369394216025356, guid: 103b66527ff1d9c4e9a16ad198ba6862, type: 3}
       propertyPath: m_ConnectedAnchor.y
@@ -1433,7 +1449,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6968582046997409741, guid: 103b66527ff1d9c4e9a16ad198ba6862, type: 3}
       propertyPath: m_ConnectedAnchor.y
-      value: 0.5
+      value: 0.49999976
       objectReference: {fileID: 0}
     - target: {fileID: 7844328416277506402, guid: 103b66527ff1d9c4e9a16ad198ba6862, type: 3}
       propertyPath: m_ConnectedAnchor.y
