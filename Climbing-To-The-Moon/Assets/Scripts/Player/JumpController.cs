@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class JumpController : MonoBehaviour
 {
-    [SerializeField, Range(0f, 10f)] private float rotationSpeed, verticalJumpForce, horizontalJumpForce, extraImpulseGrowth, maxFallSpeed;
+    [SerializeField, Range(0f, 10f)] private float rotationSpeed, verticalJumpForce, horizontalJumpForce, extraImpulseGrowth, maxFallSpeed, maxManouverSpeed;
     [SerializeField, Range(0f, 10f)] private float _horizontalForce;
     private float _baseVerticalJumpForce, _baseHorizontalJumpForce;
     private Rigidbody2D _rb;
@@ -166,7 +166,7 @@ public class JumpController : MonoBehaviour
 
     public void AirControl()
     {
-        if (_finalHorizontalDirection != Vector3.zero)
+        if ((_finalHorizontalDirection == Vector3.right && _rb.velocity.x < maxManouverSpeed) || (_finalHorizontalDirection == Vector3.left && _rb.velocity.x > -maxManouverSpeed))
         {
             if (!_isOnJetpack)
             {
