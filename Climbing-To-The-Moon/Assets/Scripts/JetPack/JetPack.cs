@@ -19,8 +19,8 @@ public class JetPack : MonoBehaviour
 
     private IEnumerator UseJetpack(GameObject player)
     {
-        player.GetComponent<PlayerController>().StartJetpack(this);
+        player.GetComponent<JumpController>().StartJetpack();
         yield return new WaitForSeconds(jetpackDuration);
-        player.GetComponent<PlayerController>().EndJetpack();
+        player.GetComponent<JumpController>().EndJetpack();
     }
 }
