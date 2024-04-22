@@ -18,12 +18,6 @@ public class StaminaBar : MonoBehaviour
 
     void Update()
     {
-
-        if (stamina <= 0f)
-        {
-            //Poner que no se mueva
-        }
-
         slider.value = stamina;
     }
 
