@@ -18,7 +18,7 @@ public class JumpController : MonoBehaviour
 
     [Header("GroundChecks")]
     [SerializeField] private LayerMask floorLayer;
-    [SerializeField] private Transform floorCheck;
+    [SerializeField] private Transform floorCheck, parentTransform;
     [SerializeField] private GameObject[] objectsDisabilitedOnGround;
     private bool _grounded;
 
@@ -170,7 +170,7 @@ public class JumpController : MonoBehaviour
         {
             if (!_isOnJetpack)
             {
-                _rb.AddForce(_finalHorizontalDirection * _horizontalForce, ForceMode2D.Impulse);
+                _rb.AddForce(_finalHorizontalDirection * _horizontalForce, ForceMode2D.Force);
             }
             else
             {
@@ -201,6 +201,7 @@ public class JumpController : MonoBehaviour
 
     public void Jump(float angle)
     {
+        transform.parent = parentTransform;
         if (_grounded)
         {
             Vector2 upVector = transform.up;
@@ -214,7 +215,7 @@ public class JumpController : MonoBehaviour
             verticalJumpForce = _baseVerticalJumpForce;
             direction.y = direction.y * verticalJumpForce * 1.5f;
             direction.x = direction.x * horizontalJumpForce * 0.75f;
-            _rb.AddForce(direction, ForceMode2D.Impulse);
+            _rb.AddForce(direction * 50, ForceMode2D.Force);
         }
     }
 
