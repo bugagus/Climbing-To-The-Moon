@@ -3,26 +3,31 @@ using DG.Tweening;
 using System.Linq;
 using System;
 
+public enum EasingFunctionType
+{
+    Linear,
+    InOutQuad,
+    InfiniteAcceleration
+}
+
 public class MovingObject : MonoBehaviour
 {
     [SerializeField] private Transform[] followPoints;
     [SerializeField] private float moveDuration = 2f;
-    [SerializeField] private bool accelerate = false;
+    [SerializeField] private EasingFunctionType easingType = EasingFunctionType.Linear;
     [SerializeField] private LineRenderer lineRenderer;
-    
 
     private bool moving = false;
 
     void Start()
     {
-        if(lineRenderer!=null)
+        if (lineRenderer != null)
         {
             Vector3[] points = new Vector3[followPoints.Length];
-            for(int i = 0; i < followPoints.Length; i ++)
+            for (int i = 0; i < followPoints.Length; i++)
             {
                 points[i] = followPoints[i].position;
             }
-            Debug.Log(points);
             lineRenderer.positionCount = points.Length;
             lineRenderer.SetPositions(points);
         }
@@ -39,18 +44,27 @@ public class MovingObject : MonoBehaviour
 
             Tween moveTween = transform.DOMove(targetPosition, moveDuration);
 
-            if (!accelerate)
+            switch (easingType)
             {
-                moveTween.SetEase(Ease.Linear);
+                case EasingFunctionType.Linear:
+                    moveTween.SetEase(Ease.Linear);
+                    break;
+                case EasingFunctionType.InOutQuad:
+                    moveTween.SetEase(Ease.InOutQuad);
+                    break;
+                case EasingFunctionType.InfiniteAcceleration:
+                    moveTween.SetEase(EaseCustom);
+                    break;
+                default:
+                    moveTween.SetEase(Ease.Linear);
+                    break;
             }
-            else
-            {
-                moveTween.SetEase(Ease.InOutQuad);
-            }
-            if(pointIndex < (followPoints.Length - 1))
+
+            if (pointIndex < (followPoints.Length - 1))
             {
                 moveTween.OnComplete(() => MoveToPoint(pointIndex + 1));
-            }else
+            }
+            else
             {
                 moveTween.OnComplete(OnMoveComplete);
             }
@@ -67,5 +81,10 @@ public class MovingObject : MonoBehaviour
         moving = false;
         Array.Reverse(followPoints);
         MoveObject();
+    }
+
+    private float EaseCustom(float time, float duration, float unusedOvershootOrAmplitude, float unusedPeriod)
+    {
+        return time * time / (duration * duration);
     }
 }
