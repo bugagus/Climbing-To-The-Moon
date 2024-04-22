@@ -6,6 +6,9 @@ using UnityEngine;
 public class JetPack : MonoBehaviour
 {
     [SerializeField] private float jetpackDuration;
+    public float jetpackVerticalForce { get; set; }
+    public float jetpackHorizontalForce { get; set; }
+
     private void OnTriggerEnter2D(Collider2D col)
     {
         if(col.gameObject.CompareTag("Player"))
@@ -16,8 +19,8 @@ public class JetPack : MonoBehaviour
 
     private IEnumerator UseJetpack(GameObject player)
     {
-        player.GetComponent<JumpController>().StartJetpack();
+        player.GetComponent<PlayerController>().StartJetpack(this);
         yield return new WaitForSeconds(jetpackDuration);
-        player.GetComponent<JumpController>().EndJetpack();
+        player.GetComponent<PlayerController>().EndJetpack();
     }
 }
