@@ -375,18 +375,6 @@ PrefabInstance:
       propertyPath: objectToFollow
       value: 
       objectReference: {fileID: 250760502}
-    - target: {fileID: 8700775999959339330, guid: 3e1e62ef99625c24d92e3fa6f80ca4b1, type: 3}
-      propertyPath: jumpForce
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 8700775999959339330, guid: 3e1e62ef99625c24d92e3fa6f80ca4b1, type: 3}
-      propertyPath: verticalJumpForce
-      value: 4.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 8700775999959339330, guid: 3e1e62ef99625c24d92e3fa6f80ca4b1, type: 3}
-      propertyPath: horizontalJumpForce
-      value: 2.5
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
