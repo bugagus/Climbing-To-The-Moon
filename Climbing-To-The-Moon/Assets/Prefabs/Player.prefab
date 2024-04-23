@@ -187,6 +187,8 @@ MonoBehaviour:
   verticalJumpForce: 4.25
   horizontalJumpForce: 2.5
   extraImpulseGrowth: 3
+  maxFallSpeed: 0
+  maxManouverSpeed: 0
   _horizontalForce: 0.1
   leftHand: {fileID: 8564180861810716890}
   rightHand: {fileID: 7130775407276618773}
@@ -203,7 +205,7 @@ MonoBehaviour:
   - {fileID: 6861133991045612543}
   jetpackVerticalForce: 10
   jetpackHorizontalForce: 3
-  incrStaminaInGround: 20
+  incrStaminaInGround: 30
   decrsStamina: 10
 --- !u!50 &9016267182088448969
 Rigidbody2D:
@@ -415,7 +417,7 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.003911525, y: 0}
+  m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.24574688
 --- !u!114 &8564180861810716890
@@ -526,7 +528,7 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.03129278, y: 0}
+  m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.23401205
 --- !u!114 &7130775407276618773

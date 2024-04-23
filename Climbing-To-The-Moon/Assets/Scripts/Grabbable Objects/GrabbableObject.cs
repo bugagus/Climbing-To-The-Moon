@@ -10,7 +10,8 @@ public class GrabbableObject : MonoBehaviour
     private StaminaBar _staminaBar;
     private Animator _animator;
 
-    [SerializeField, Range(0, 100)] private int _discrargeStamina;
+    [SerializeField, Range(0, 100)] private int _stamina;
+    [SerializeField] private bool _boolRechargeStamina;
 
     private void Start()
     {
@@ -23,7 +24,12 @@ public class GrabbableObject : MonoBehaviour
     {
         if (IsBeingGrabbed)
         {
-            _staminaBar.discharge(_discrargeStamina);
+            if (!_boolRechargeStamina)
+                _staminaBar.discharge(_stamina);
+            else
+                _staminaBar.recharge(_stamina);
+
+
             _animator.SetBool("Grabbed", true);
         }
         else

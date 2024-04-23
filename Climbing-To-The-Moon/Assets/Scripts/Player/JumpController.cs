@@ -170,11 +170,11 @@ public class JumpController : MonoBehaviour
         {
             if (!_isOnJetpack)
             {
-                _rb.AddForce(_finalHorizontalDirection * _horizontalForce, ForceMode2D.Impulse);
+                _rb.AddForce(_finalHorizontalDirection * _horizontalForce, ForceMode2D.Force);
             }
             else
             {
-                _rb.AddForce(_finalHorizontalDirection * _horizontalForce * jetpackHorizontalForce, ForceMode2D.Impulse);
+                _rb.AddForce(_finalHorizontalDirection * _horizontalForce * jetpackHorizontalForce, ForceMode2D.Force);
             }
         }
     }
