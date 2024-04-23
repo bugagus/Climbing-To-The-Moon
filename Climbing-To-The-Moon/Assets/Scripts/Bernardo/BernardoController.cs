@@ -9,15 +9,6 @@ public class BernardoController : MonoBehaviour
 
     private Animator _animator;
     private JumpController _jumpController;
-    void Start()
-    {
-        
-    }
-
-    void Update()
-    {
-        
-    }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -26,6 +17,7 @@ public class BernardoController : MonoBehaviour
         {
             Vector2 bounceDirection = other.transform.position.x > transform.position.x ? Vector2.right : Vector2.left;
             other.GetComponent<Rigidbody2D>().AddForce(bounceDirection * _bounceForce, ForceMode2D.Impulse);
+            other.GetComponent<Animator>().SetTrigger("TakeDamage");
         }
     }
 
