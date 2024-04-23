@@ -5,54 +5,62 @@ using UnityEngine.UI;
 
 public class FadeBackground : MonoBehaviour
 {
-    public Animator animatorBg1,animatorBg2,animatorBg3,animatorBg4;
+    public Animator animatorBg1, animatorBg2, animatorBg3, animatorBg4;
+    [SerializeField] private GameObject _beetle;
+    [SerializeField, Range(0f, 25f)] private float _bg1Height, _bg2Height, _bg3Height, _bg4Height;
+
+
+    private void Start()
+    {
+
+    }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.V))
+        Debug.Log(_beetle.transform.position.y);
+        if ((_beetle.transform.position.y >= _bg1Height && _beetle.transform.position.y < _bg2Height) || (_beetle.transform.position.y < _bg1Height))
         {
-            if (animatorBg1.GetBool("Background"))
-            {
-                animatorBg1.SetBool("Background", false);
-            }
-            else
-            {
-                animatorBg1.SetBool("Background", true);
-            }
+            animatorBg1.SetBool("Background", true);
         }
-        if (Input.GetKeyDown(KeyCode.B))
+        else
         {
-            if (animatorBg2.GetBool("Background"))
-            {
-                animatorBg2.SetBool("Background", false);
-            }
-            else
-            {
-                animatorBg2.SetBool("Background", true);
-            }
+            // Desactivar el animador del fondo 1 si el personaje está fuera de su área
+            animatorBg1.SetBool("Background", false);
         }
-        if (Input.GetKeyDown(KeyCode.N))
+
+        // Activar el animador del fondo 2 si el personaje está dentro de su área
+        if ((_beetle.transform.position.y >= _bg2Height && _beetle.transform.position.y < _bg3Height) || (_beetle.transform.position.y < _bg2Height))
         {
-            if (animatorBg3.GetBool("Background"))
-            {
-                animatorBg3.SetBool("Background", false);
-            }
-            else
-            {
-                animatorBg3.SetBool("Background", true);
-            }
+            animatorBg2.SetBool("Background", true);
         }
-        if (Input.GetKeyDown(KeyCode.M))
+        else
         {
-            if (animatorBg4.GetBool("Background"))
-            {
-                animatorBg4.SetBool("Background", false);
-            }
-            else
-            {
-                animatorBg4.SetBool("Background", true);
-            }
+            // Desactivar el animador del fondo 2 si el personaje está fuera de su área
+            animatorBg2.SetBool("Background", false);
         }
+
+        // Activar el animador del fondo 3 si el personaje está dentro de su área
+        if ((_beetle.transform.position.y >= _bg3Height && _beetle.transform.position.y < _bg4Height) || (_beetle.transform.position.y < _bg3Height))
+        {
+            animatorBg3.SetBool("Background", true);
+        }
+        else
+        {
+            // Desactivar el animador del fondo 3 si el personaje está fuera de su área
+            animatorBg3.SetBool("Background", false);
+        }
+
+        // Activar el animador del fondo 4 si el personaje está dentro de su área
+        if ((_beetle.transform.position.y >= _bg4Height) || (_beetle.transform.position.y < _bg4Height))
+        {
+            animatorBg4.SetBool("Background", true);
+        }
+        else
+        {
+            // Desactivar el animador del fondo 4 si el personaje está fuera de su área
+            animatorBg4.SetBool("Background", false);
+        }
+
     }
 
 
