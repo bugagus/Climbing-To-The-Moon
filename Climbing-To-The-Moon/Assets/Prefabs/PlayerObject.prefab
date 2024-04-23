@@ -1102,15 +1102,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1939450931163994224, guid: f0fa27dd60d3fd24daf2589926ca4a5a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.688
+      value: 0.6
       objectReference: {fileID: 0}
     - target: {fileID: 1939450931163994224, guid: f0fa27dd60d3fd24daf2589926ca4a5a, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.224
+      value: 0.22
       objectReference: {fileID: 0}
     - target: {fileID: 2169925547346010346, guid: f0fa27dd60d3fd24daf2589926ca4a5a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.544
+      value: -0.6
       objectReference: {fileID: 0}
     - target: {fileID: 2169925547346010346, guid: f0fa27dd60d3fd24daf2589926ca4a5a, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1158,11 +1158,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4731364165897003861, guid: f0fa27dd60d3fd24daf2589926ca4a5a, type: 3}
       propertyPath: m_Radius
-      value: 0.17800908
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 4731364165897003861, guid: f0fa27dd60d3fd24daf2589926ca4a5a, type: 3}
       propertyPath: m_Offset.x
-      value: -0.087295756
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4731364165897003861, guid: f0fa27dd60d3fd24daf2589926ca4a5a, type: 3}
       propertyPath: m_ExcludeLayers.m_Bits
@@ -1170,11 +1170,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5269463007131468985, guid: f0fa27dd60d3fd24daf2589926ca4a5a, type: 3}
       propertyPath: m_Radius
-      value: 0.17340964
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 5269463007131468985, guid: f0fa27dd60d3fd24daf2589926ca4a5a, type: 3}
       propertyPath: m_Offset.x
-      value: -0.068425715
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5269463007131468985, guid: f0fa27dd60d3fd24daf2589926ca4a5a, type: 3}
       propertyPath: m_ExcludeLayers.m_Bits
@@ -1191,7 +1191,7 @@ PrefabInstance:
     - target: {fileID: 5553505788274135459, guid: f0fa27dd60d3fd24daf2589926ca4a5a, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 16c43c5b0d4f695459d6297d5a912209, type: 3}
+      objectReference: {fileID: 21300000, guid: 8be2d7756ed2fb549b39e88d0e4b51a1, type: 3}
     - target: {fileID: 5553505788274135459, guid: f0fa27dd60d3fd24daf2589926ca4a5a, type: 3}
       propertyPath: m_SortingOrder
       value: 3
@@ -1213,8 +1213,16 @@ PrefabInstance:
       value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7619297623774679180, guid: f0fa27dd60d3fd24daf2589926ca4a5a, type: 3}
+      propertyPath: maxFallSpeed
+      value: 3.12
+      objectReference: {fileID: 0}
+    - target: {fileID: 7619297623774679180, guid: f0fa27dd60d3fd24daf2589926ca4a5a, type: 3}
       propertyPath: _horizontalForce
-      value: 0.1
+      value: 6.36
+      objectReference: {fileID: 0}
+    - target: {fileID: 7619297623774679180, guid: f0fa27dd60d3fd24daf2589926ca4a5a, type: 3}
+      propertyPath: maxManouverSpeed
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7619297623774679180, guid: f0fa27dd60d3fd24daf2589926ca4a5a, type: 3}
       propertyPath: maxVerticalSpeed
@@ -1226,7 +1234,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7619297623774679180, guid: f0fa27dd60d3fd24daf2589926ca4a5a, type: 3}
       propertyPath: verticalJumpForce
-      value: 4.25
+      value: 4.5
       objectReference: {fileID: 0}
     - target: {fileID: 7619297623774679180, guid: f0fa27dd60d3fd24daf2589926ca4a5a, type: 3}
       propertyPath: maxHorizontalSpeed
@@ -1238,7 +1246,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7619297623774679180, guid: f0fa27dd60d3fd24daf2589926ca4a5a, type: 3}
       propertyPath: incrStaminaInGround
-      value: 20
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 7619297623774679180, guid: f0fa27dd60d3fd24daf2589926ca4a5a, type: 3}
       propertyPath: jetpackVerticalForce
@@ -1435,13 +1443,17 @@ PrefabInstance:
       propertyPath: YOffset
       value: -6
       objectReference: {fileID: 0}
+    - target: {fileID: 4810158601227632260, guid: 103b66527ff1d9c4e9a16ad198ba6862, type: 3}
+      propertyPath: objectToFollow
+      value: 
+      objectReference: {fileID: 1142607702309346747}
     - target: {fileID: 5783310203656349494, guid: 103b66527ff1d9c4e9a16ad198ba6862, type: 3}
       propertyPath: m_ConnectedAnchor.y
-      value: 0.49999952
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 6477713225613618966, guid: 103b66527ff1d9c4e9a16ad198ba6862, type: 3}
       propertyPath: m_ConnectedAnchor.y
-      value: -0.49999976
+      value: -0.5
       objectReference: {fileID: 0}
     - target: {fileID: 6630369394216025356, guid: 103b66527ff1d9c4e9a16ad198ba6862, type: 3}
       propertyPath: m_ConnectedAnchor.y
@@ -1449,11 +1461,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6968582046997409741, guid: 103b66527ff1d9c4e9a16ad198ba6862, type: 3}
       propertyPath: m_ConnectedAnchor.y
-      value: 0.49999976
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 7844328416277506402, guid: 103b66527ff1d9c4e9a16ad198ba6862, type: 3}
       propertyPath: m_ConnectedAnchor.y
-      value: -0.49999952
+      value: -0.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
