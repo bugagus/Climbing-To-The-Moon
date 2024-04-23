@@ -34,7 +34,12 @@ public class MovingObject : MonoBehaviour
             lineRenderer.SetPositions(points);
         }
         transform.position = followPoints[0].position;
-        MoveObject();
+    }
+
+    void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.Tab))
+            MoveObject();
     }
 
     public void MoveToPoint(int pointIndex)
