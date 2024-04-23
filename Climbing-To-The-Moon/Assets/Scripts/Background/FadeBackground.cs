@@ -6,13 +6,13 @@ using UnityEngine.UI;
 public class FadeBackground : MonoBehaviour
 {
     public Animator animatorBg1, animatorBg2, animatorBg3, animatorBg4;
-    [SerializeField] private GameObject _beetle;
+    private GameObject _beetle;
     [SerializeField, Range(0f, 25f)] private float _bg1Height, _bg2Height, _bg3Height, _bg4Height;
 
 
-    private void Start()
+    private void Awake()
     {
-
+        _beetle = GameObject.FindGameObjectWithTag("Player");
     }
 
     private void Update()

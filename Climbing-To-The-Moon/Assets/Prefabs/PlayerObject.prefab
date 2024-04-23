@@ -1102,7 +1102,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1939450931163994224, guid: f0fa27dd60d3fd24daf2589926ca4a5a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.6
+      value: 0.58
       objectReference: {fileID: 0}
     - target: {fileID: 1939450931163994224, guid: f0fa27dd60d3fd24daf2589926ca4a5a, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1110,7 +1110,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2169925547346010346, guid: f0fa27dd60d3fd24daf2589926ca4a5a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.6
+      value: -0.58
       objectReference: {fileID: 0}
     - target: {fileID: 2169925547346010346, guid: f0fa27dd60d3fd24daf2589926ca4a5a, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1158,7 +1158,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4731364165897003861, guid: f0fa27dd60d3fd24daf2589926ca4a5a, type: 3}
       propertyPath: m_Radius
-      value: 0.2
+      value: 0.18
       objectReference: {fileID: 0}
     - target: {fileID: 4731364165897003861, guid: f0fa27dd60d3fd24daf2589926ca4a5a, type: 3}
       propertyPath: m_Offset.x
@@ -1170,7 +1170,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5269463007131468985, guid: f0fa27dd60d3fd24daf2589926ca4a5a, type: 3}
       propertyPath: m_Radius
-      value: 0.2
+      value: 0.18
       objectReference: {fileID: 0}
     - target: {fileID: 5269463007131468985, guid: f0fa27dd60d3fd24daf2589926ca4a5a, type: 3}
       propertyPath: m_Offset.x
@@ -1201,6 +1201,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7619297623774679180, guid: f0fa27dd60d3fd24daf2589926ca4a5a, type: 3}
+      propertyPath: _maxForce
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7619297623774679180, guid: f0fa27dd60d3fd24daf2589926ca4a5a, type: 3}
       propertyPath: jumpForce
       value: 8
       objectReference: {fileID: 0}
@@ -1208,6 +1212,10 @@ PrefabInstance:
       propertyPath: floorCheck
       value: 
       objectReference: {fileID: 1680808741350270782}
+    - target: {fileID: 7619297623774679180, guid: f0fa27dd60d3fd24daf2589926ca4a5a, type: 3}
+      propertyPath: _chargedJump
+      value: 8.5
+      objectReference: {fileID: 0}
     - target: {fileID: 7619297623774679180, guid: f0fa27dd60d3fd24daf2589926ca4a5a, type: 3}
       propertyPath: decrsStamina
       value: 10
