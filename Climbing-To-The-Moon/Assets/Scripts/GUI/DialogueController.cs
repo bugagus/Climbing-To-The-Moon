@@ -40,8 +40,6 @@ public class DialogueController : MonoBehaviour
     private Animator _animator;
     private Coroutine _displayLineCoroutine;
     private bool _isInDialogue;
-    [SerializeField] private GameObject player;
-    [SerializeField] private bool stopPlayer;
     [SerializeField] private TextWobble textWobble;
 
     void Start()
@@ -127,6 +125,7 @@ public class DialogueController : MonoBehaviour
 
     private void FinishDialogue()
     {
+        FindObjectOfType<IntroController>().EndIntro();
         continueIcon.SetActive(false);
         _animator.SetTrigger("Disappear");
         _isInDialogue = false;

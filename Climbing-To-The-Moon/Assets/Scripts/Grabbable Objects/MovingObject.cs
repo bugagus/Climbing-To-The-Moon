@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 using System.Linq;
@@ -32,7 +34,12 @@ public class MovingObject : MonoBehaviour
             lineRenderer.SetPositions(points);
         }
         transform.position = followPoints[0].position;
-        MoveObject();
+    }
+
+    void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.Tab))
+            MoveObject();
     }
 
     public void MoveToPoint(int pointIndex)
@@ -85,6 +92,8 @@ public class MovingObject : MonoBehaviour
 
     private float EaseCustom(float time, float duration, float unusedOvershootOrAmplitude, float unusedPeriod)
     {
-        return time * time / (duration * duration);
+        return time * time * time / (duration * duration * duration);
     }
+
+    
 }
