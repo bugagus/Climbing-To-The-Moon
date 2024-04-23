@@ -11,8 +11,11 @@ public class JumpController : MonoBehaviour
     [SerializeField, Range(0f, 10f)] private float _chargedJump;
     
     private float _baseVerticalJumpForce, _baseHorizontalJumpForce;
+    [SerializeField]private float chargedJumpGraceTime;
+    private float _originalChargedJumpGraceTime;
     private Rigidbody2D _rb;
     private Animator _animator;
+    private bool _comesFromBothGrab = false;
     private Vector3 _finalHorizontalDirection, _rightHorizontalDirection, _leftHorizontalDirection;
 
     [Header("Hands")]
@@ -33,6 +36,9 @@ public class JumpController : MonoBehaviour
 
     private StaminaBar staminaBar;
     [SerializeField]public float incrStaminaInGround, decrsStamina;
+    public float duracionTransicion = 5f; // Duración de la transición en segundos
+    private float tiempoInicio;
+    private float velocidadInicial;
 
     void Awake()
     {
@@ -42,11 +48,30 @@ public class JumpController : MonoBehaviour
 
     void Start()
     {
+        _originalChargedJumpGraceTime = chargedJumpGraceTime;
         _rb = GetComponent<Rigidbody2D>();
         _baseHorizontalJumpForce = horizontalJumpForce;
         _baseVerticalJumpForce = verticalJumpForce;
         _animator = GetComponent<Animator>();
         _finalHorizontalDirection = Vector3.zero;
+    }
+
+    void Update()
+    {
+        if(chargedJumpGraceTime > 0)
+        {
+            chargedJumpGraceTime -= Time.deltaTime;
+            if(chargedJumpGraceTime < 0)
+            {
+                verticalJumpForce = _baseHorizontalJumpForce;
+                horizontalJumpForce = _baseHorizontalJumpForce;
+            }
+        }
+
+        if (rightHand.IsHandGrabbed == true && leftHand.IsHandGrabbed == true)
+        {
+            chargedJumpGraceTime = _originalChargedJumpGraceTime;
+        }
     }
 
     void FixedUpdate()
@@ -109,7 +134,6 @@ public class JumpController : MonoBehaviour
             staminaBar.recharge(incrStaminaInGround);
         }
         VelocityConstraints();
-
     }
 
     public void Grab(Hand hand)
@@ -147,6 +171,16 @@ public class JumpController : MonoBehaviour
 
         if (otherHand.IsHandGrabbed == false)
         {
+            if(chargedJumpGraceTime > 0)
+            {
+                _comesFromBothGrab = true;
+                tiempoInicio = Time.time;
+                chargedJumpGraceTime = 0f;
+            }else
+            {
+                _comesFromBothGrab = false;
+                chargedJumpGraceTime = 0f;
+            }
             if (releasedHand.touchedGrabbableObject != null)
                 releasedHand.touchedGrabbableObject.IsBeingGrabbed = false;
             Vector2 direction = transform.up;
@@ -342,9 +376,20 @@ public class JumpController : MonoBehaviour
 
     private void VelocityConstraints()
     {
-        if(_rb.velocity.y < -maxFallSpeed)
+        if(_comesFromBothGrab)
         {
-            _rb.velocity = new Vector2(_rb.velocity.x, -maxFallSpeed);
+            float progreso = (Time.time - tiempoInicio) / duracionTransicion;
+            progreso = Mathf.Clamp01(progreso);
+            float velocidadActual = Mathf.Lerp(velocidadInicial, maxFallSpeed, progreso);
+
+            transform.Translate(Vector3.up * velocidadActual * Time.deltaTime);
+        }
+        else
+        {
+            if(_rb.velocity.y < -maxFallSpeed)
+            {
+                _rb.velocity = new Vector2(_rb.velocity.x, -maxFallSpeed);
+            }
         }
     }
 
