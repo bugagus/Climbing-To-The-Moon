@@ -7,6 +7,9 @@ public class JumpController : MonoBehaviour
 {
     [SerializeField, Range(0f, 10f)] private float rotationSpeed, verticalJumpForce, horizontalJumpForce, extraImpulseGrowth, maxFallSpeed, maxManouverSpeed;
     [SerializeField, Range(0f, 10f)] private float _horizontalForce;
+    [SerializeField, Range(0f, 10f)] private float _maxForce;
+    [SerializeField, Range(0f, 10f)] private float _chargedJump;
+    
     private float _baseVerticalJumpForce, _baseHorizontalJumpForce;
     private Rigidbody2D _rb;
     private Animator _animator;
@@ -58,11 +61,13 @@ public class JumpController : MonoBehaviour
                 {
                     Rotate(rightHand);
                     _animator.SetBool("GrabLeft", false);
+                    _animator.SetBool("GrabBothCharged", false);
                 }
                 else if (rightHand.IsHandGrabbed == false && leftHand.IsHandGrabbed == true)
                 {
                     Rotate(leftHand);
                     _animator.SetBool("GrabRight", false);
+                    _animator.SetBool("GrabBothCharged", false);
 
                 }
                 else if (rightHand.IsHandGrabbed == true && leftHand.IsHandGrabbed == true)
@@ -70,8 +75,14 @@ public class JumpController : MonoBehaviour
                     _animator.SetBool("GrabBoth", true);
                     _rb.velocity = new Vector3(0f, 0f, 0f);
                     _rb.gravityScale = 0f;
-                    if (verticalJumpForce < 10) verticalJumpForce = verticalJumpForce + extraImpulseGrowth * Time.deltaTime;
-                    if (horizontalJumpForce < 10) horizontalJumpForce = horizontalJumpForce + extraImpulseGrowth * Time.deltaTime;
+                    if (verticalJumpForce < _maxForce) verticalJumpForce = verticalJumpForce + extraImpulseGrowth * Time.deltaTime;
+                    if (horizontalJumpForce < _maxForce) horizontalJumpForce = horizontalJumpForce + extraImpulseGrowth * Time.deltaTime;
+
+                    if (verticalJumpForce >= _chargedJump || horizontalJumpForce >= _chargedJump)
+                    {
+                        _animator.SetBool("GrabBothCharged", true);
+                        gameObject.transform.parent.DOShakePosition(0.01f, 0.01f, 1, 30, false, true, ShakeRandomnessMode.Harmonic);
+                    }
                 }
                 else if (rightHand.IsHandGrabbed == false && leftHand.IsHandGrabbed == false)
                 {
@@ -80,6 +91,7 @@ public class JumpController : MonoBehaviour
                     _animator.SetBool("GrabRight", false);
                     _animator.SetBool("GrabLeft", false);
                     _animator.SetBool("GrabBoth", false);
+                    _animator.SetBool("GrabBothCharged", false);
                     if (_isOnJetpack)
                         _rb.AddForce(jetpackVerticalForce * transform.up, ForceMode2D.Force);
                 }
