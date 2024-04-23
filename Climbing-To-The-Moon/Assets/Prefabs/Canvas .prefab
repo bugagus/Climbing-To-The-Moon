@@ -146,6 +146,7 @@ GameObject:
   - component: {fileID: 3352464251228502452}
   - component: {fileID: 157112739722295970}
   - component: {fileID: 5515824675085046637}
+  - component: {fileID: 4174134331197910085}
   m_Layer: 5
   m_Name: Volume
   m_TagString: Untagged
@@ -201,7 +202,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -138010977, guid: 4423fdf1061557744933deeb7b867460, type: 3}
+  m_Sprite: {fileID: -1919227122, guid: c8009b359b7c009428ed39a0d44eb73c, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -224,13 +225,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 0
     m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
+  m_Transition: 2
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -241,7 +242,7 @@ MonoBehaviour:
     m_FadeDuration: 0.1
   m_SpriteState:
     m_HighlightedSprite: {fileID: 0}
-    m_PressedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 557683712, guid: c8009b359b7c009428ed39a0d44eb73c, type: 3}
     m_SelectedSprite: {fileID: 0}
     m_DisabledSprite: {fileID: 0}
   m_AnimationTriggers:
@@ -267,6 +268,27 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!95 &4174134331197910085
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2067177282049394570}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 42393aa5d1a35cc43b5ea0e7baba1941, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &2325870126352210925
 GameObject:
   m_ObjectHideFlags: 0
@@ -423,7 +445,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 4
   m_TargetDisplay: 0
 --- !u!114 &6480017146994864261
 MonoBehaviour:
@@ -480,6 +502,7 @@ MonoBehaviour:
   pauseButton: {fileID: 711411413195230918}
   pauseMenu: {fileID: 7494475494797927668}
   mAnimator: {fileID: 7345907110610086173}
+  butAnimator: {fileID: 4174134331197910085}
   animDuration: 1
 --- !u!1001 &1606677976417806949
 PrefabInstance:
@@ -930,6 +953,14 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5063806637737352492, guid: 55398cc4d76283a41ad40ce6f8744943, type: 3}
+      propertyPath: m_Transition
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5063806637737352492, guid: 55398cc4d76283a41ad40ce6f8744943, type: 3}
+      propertyPath: m_SpriteState.m_PressedSprite
+      value: 
+      objectReference: {fileID: 1879888031, guid: aa7c5d09327bfb64597f8f900775b4c2, type: 3}
+    - target: {fileID: 5063806637737352492, guid: 55398cc4d76283a41ad40ce6f8744943, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 7538655442071695136}
@@ -1008,7 +1039,7 @@ PrefabInstance:
     - target: {fileID: 8189476756273327270, guid: 55398cc4d76283a41ad40ce6f8744943, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: -682963239, guid: 4423fdf1061557744933deeb7b867460, type: 3}
+      objectReference: {fileID: -1497162116, guid: aa7c5d09327bfb64597f8f900775b4c2, type: 3}
     - target: {fileID: 8351687765575912904, guid: 55398cc4d76283a41ad40ce6f8744943, type: 3}
       propertyPath: m_Pivot.x
       value: 1
