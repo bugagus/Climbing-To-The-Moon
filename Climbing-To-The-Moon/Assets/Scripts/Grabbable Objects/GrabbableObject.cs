@@ -5,7 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(Animator))]
 public class GrabbableObject : MonoBehaviour
 {
-    public bool IsBeingGrabbed { get; set; }
+    public bool IsBeingGrabbed { get; set; } 
 
     private StaminaBar _staminaBar;
     private Animator _animator;

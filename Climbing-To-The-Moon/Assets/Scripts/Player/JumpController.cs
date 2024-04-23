@@ -28,7 +28,6 @@ public class JumpController : MonoBehaviour
     [SerializeField, Range(0f, 10f)] private float jetpackVerticalForce, jetpackHorizontalForce;
     private bool _isOnJetpack;
 
-
     private StaminaBar staminaBar;
     [SerializeField]public float incrStaminaInGround, decrsStamina;
 
@@ -211,11 +210,11 @@ public class JumpController : MonoBehaviour
                 Mathf.Sin(angleInRadians) * upVector.x + Mathf.Cos(angleInRadians) * upVector.y
             );
             direction.Normalize();
-            horizontalJumpForce = _baseHorizontalJumpForce;
-            verticalJumpForce = _baseVerticalJumpForce;
             direction.y = direction.y * verticalJumpForce * 1.5f;
             direction.x = direction.x * horizontalJumpForce * 0.75f;
             _rb.AddForce(direction * 50, ForceMode2D.Force);
+            horizontalJumpForce = _baseHorizontalJumpForce;
+            verticalJumpForce = _baseVerticalJumpForce;
         }
     }
 
@@ -351,6 +350,6 @@ public class JumpController : MonoBehaviour
     {
         EndRightAction();
         EndLeftAction();
-    }
+    } 
 }
 
