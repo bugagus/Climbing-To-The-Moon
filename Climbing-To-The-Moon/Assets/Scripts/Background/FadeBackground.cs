@@ -17,7 +17,6 @@ public class FadeBackground : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log(_beetle.transform.position.y);
         if ((_beetle.transform.position.y >= _bg1Height && _beetle.transform.position.y < _bg2Height) || (_beetle.transform.position.y < _bg1Height))
         {
             animatorBg1.SetBool("Background", true);
