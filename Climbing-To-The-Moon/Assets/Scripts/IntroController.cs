@@ -11,11 +11,17 @@ public class IntroController : MonoBehaviour
     [SerializeField] private JumpController jumpController;
     [SerializeField] private MoveCamera mainCamera;
     [SerializeField] private Transform introPoint, playerInitialPoint;
+    [SerializeField] private float logoFadeSpeed;
+    [SerializeField] private FadeOut logo;
     private bool introEnded = false;
 
-    void Start()
+    void Update()
     {
-        StartIntro();
+        if(Input.GetKeyDown(KeyCode.Tab))
+        {
+            logo.StartFadeOut(logoFadeSpeed);
+            DOVirtual.DelayedCall((1/logoFadeSpeed) + 1, () => StartIntro());
+        }
     }
 
     
