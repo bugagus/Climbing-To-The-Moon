@@ -41,6 +41,9 @@ public class JumpController : MonoBehaviour
     [Header("SoundController")]
     [SerializeField] private SoundController _soundController;
 
+
+    [SerializeField] private GameObject jetpack;
+
     void Awake()
     {
         staminaBar = GameObject.FindGameObjectWithTag("StaminaBar").GetComponent<StaminaBar>();
@@ -55,6 +58,7 @@ public class JumpController : MonoBehaviour
         _baseVerticalJumpForce = verticalJumpForce;
         _animator = GetComponent<Animator>();
         _finalHorizontalDirection = Vector3.zero;
+        StopMovement();
     }
 
     void Update()
@@ -361,6 +365,7 @@ public class JumpController : MonoBehaviour
     }
     public void StartJetpack()
     {
+        jetpack.SetActive(true);
         foreach (GameObject obj in objectsDisabilitedOnJetpack)
         {
             obj.SetActive(false);
@@ -370,6 +375,7 @@ public class JumpController : MonoBehaviour
 
     public void EndJetpack()
     {
+        jetpack.SetActive(false);
         foreach (GameObject obj in objectsDisabilitedOnJetpack)
         {
             obj.SetActive(true);
@@ -387,12 +393,12 @@ public class JumpController : MonoBehaviour
 
     public void ContinueMovement()
     {
-
+        _rb.bodyType = RigidbodyType2D.Dynamic;
     }
 
     public void StopMovement()
     {
-
+        _rb.bodyType = RigidbodyType2D.Static;
     }
 
     public void ReleaseBoth()

@@ -149,7 +149,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fadeSpeed: 0.5
-  image: {fileID: 0}
+  image: {fileID: 16764017143782441}
   textMeshPro: {fileID: 5606536305666474719}
 --- !u!1 &7332174955927716497
 GameObject:

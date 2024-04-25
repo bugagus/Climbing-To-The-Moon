@@ -24,11 +24,21 @@ public class SoundController : MonoBehaviour
     }
     public void Charging()
     {
-        _audioSource.PlayOneShot(_charging, _chargingV);
+        if(!_isPlaying)
+        {
+            _audioSource.loop = false;
+            _audioSource.clip = _charging;
+            _audioSource.Play();
+        }
     }
     public void FullCharged()
     {
-        _audioSource.PlayOneShot(_fullCharged, _fullChargedV);
+        if(!_isPlaying)
+        {
+            _audioSource.loop = false;
+            _audioSource.clip = _charging;
+            _audioSource.Play();
+        }
 
     }
     public void Text()

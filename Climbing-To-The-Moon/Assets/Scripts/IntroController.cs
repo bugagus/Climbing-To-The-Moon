@@ -17,6 +17,7 @@ public class IntroController : MonoBehaviour
     [SerializeField] private GameObject[] objectsToActivate;
     [SerializeField] private MoonController moonController;
     [SerializeField] private GameObject superman;
+    [SerializeField] private GameObject musicManager;
     public float fadeInDuration = 1.0f;
     public float delayBetweenBackgrounds = 1.0f;
 
@@ -45,7 +46,6 @@ public class IntroController : MonoBehaviour
     public void StartIntro()
     {
         mainCamera.gameObject.GetComponent<CinemachineBrain>().enabled = false;
-        jumpController.StopMovement();
         moonController.ShutDown();
         DOVirtual.DelayedCall(introMoonAnimationDuration, () => MoveCameraDown());
         DOVirtual.DelayedCall(introMoonAnimationDuration + cameraMoveDuration + 2, () => introDialogue.StartDialogue());
@@ -73,6 +73,7 @@ public class IntroController : MonoBehaviour
                 }
                 jumpController.ContinueMovement();
                 mainCamera.gameObject.GetComponent<CinemachineBrain>().enabled = true;
+                musicManager.SetActive(true);
                 });
         }
 
