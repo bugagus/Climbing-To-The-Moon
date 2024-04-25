@@ -302,7 +302,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7077168488529717468, guid: efead21aae6308d4981a75fe4f0dcb8b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.17429538
+      value: 0.17426963
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -606,14 +606,6 @@ PrefabInstance:
     - target: {fileID: 4524438613091187827, guid: 3e1e62ef99625c24d92e3fa6f80ca4b1, type: 3}
       propertyPath: m_Name
       value: PlayerObject
-      objectReference: {fileID: 0}
-    - target: {fileID: 8700775999959339330, guid: 3e1e62ef99625c24d92e3fa6f80ca4b1, type: 3}
-      propertyPath: _maxForce
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 8700775999959339330, guid: 3e1e62ef99625c24d92e3fa6f80ca4b1, type: 3}
-      propertyPath: _chargedJump
-      value: 8.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -41,6 +41,7 @@ public class Hand : MonoBehaviour
         if (other.CompareTag("GrabbableObject"))
         {
             IsHandColliding = false;
+            other.GetComponent<GrabbableObject>().IsBeingGrabbed = false;
         }
         IsHandGrabbed = false;
     }

@@ -9,7 +9,7 @@ public class JumpController : MonoBehaviour
     [SerializeField, Range(0f, 10f)] private float _horizontalForce;
     [SerializeField, Range(0f, 10f)] private float _maxForce;
     [SerializeField, Range(0f, 10f)] private float _chargedJump;
-    
+
     private float _baseVerticalJumpForce, _baseHorizontalJumpForce;
     [SerializeField]private float chargedJumpGraceTime;
     private float _originalChargedJumpGraceTime;
@@ -34,11 +34,12 @@ public class JumpController : MonoBehaviour
     [SerializeField, Range(0f, 10f)] private float jetpackVerticalForce, jetpackHorizontalForce;
     private bool _isOnJetpack;
 
+    [Header("StaminaBar")]
     private StaminaBar staminaBar;
-    [SerializeField]public float incrStaminaInGround, decrsStamina;
-    public float duracionTransicion = 5f; // Duración de la transición en segundos
-    private float tiempoInicio;
-    private float velocidadInicial;
+    [SerializeField] public float incrStaminaInGround, decrsStamina;
+
+    [Header("SoundController")]
+    [SerializeField] private SoundController _soundController;
 
     void Awake()
     {
@@ -76,22 +77,26 @@ public class JumpController : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (!_animator.GetBool("GrabBothCharged"))
+            _soundController.setIsPlaying(false);
         GroundCheck();
         if (!_grounded)
         {
-            if(staminaBar.stamina > 0)
+            if (staminaBar.stamina > 0)
             {
                 if (rightHand.IsHandGrabbed == true && leftHand.IsHandGrabbed == false)
                 {
                     Rotate(rightHand);
                     _animator.SetBool("GrabLeft", false);
                     _animator.SetBool("GrabBothCharged", false);
+                    _animator.SetBool("GrabBoth", false);
                 }
                 else if (rightHand.IsHandGrabbed == false && leftHand.IsHandGrabbed == true)
                 {
                     Rotate(leftHand);
                     _animator.SetBool("GrabRight", false);
                     _animator.SetBool("GrabBothCharged", false);
+                    _animator.SetBool("GrabBoth", false);
 
                 }
                 else if (rightHand.IsHandGrabbed == true && leftHand.IsHandGrabbed == true)
@@ -105,6 +110,8 @@ public class JumpController : MonoBehaviour
                     if (verticalJumpForce >= _chargedJump || horizontalJumpForce >= _chargedJump)
                     {
                         _animator.SetBool("GrabBothCharged", true);
+                        _soundController.FullCharged();
+                        _soundController.setIsPlaying(true);
                         gameObject.transform.parent.DOShakePosition(0.01f, 0.01f, 1, 30, false, true, ShakeRandomnessMode.Harmonic);
                     }
                 }
@@ -140,13 +147,15 @@ public class JumpController : MonoBehaviour
     {
         if (!_grounded && staminaBar.stamina > 0)
         {
-            if(hand == leftHand)
+            if (hand == leftHand)
             {
                 _animator.SetBool("GrabLeft", true);
+                _soundController.Grab();
             }
-            else if(hand == rightHand)
+            else if (hand == rightHand)
             {
                 _animator.SetBool("GrabRight", true);
+                _soundController.Grab();
             }
             hand.IsHandGrabbed = true;
             hand.touchedGrabbableObject.IsBeingGrabbed = true;
@@ -160,10 +169,11 @@ public class JumpController : MonoBehaviour
     public void Release(Hand releasedHand)
     {
         Hand otherHand;
-        if(releasedHand == rightHand)
+        if (releasedHand == rightHand)
         {
             otherHand = leftHand;
-        }else
+        }
+        else
         {
             otherHand = rightHand;
         }
@@ -197,13 +207,15 @@ public class JumpController : MonoBehaviour
                     releasedHand.touchedGrabbableObject.IsBeingGrabbed = false;
         }
 
-        if(releasedHand == leftHand)
+        if (releasedHand == leftHand)
         {
             _animator.SetBool("GrabLeft", false);
+            _soundController.Grab();
         }
-        else if(releasedHand == rightHand)
+        else if (releasedHand == rightHand)
         {
             _animator.SetBool("GrabRight", false);
+            _soundController.Grab();
         }
         _animator.SetBool("GrabBoth", false);
 
@@ -235,10 +247,11 @@ public class JumpController : MonoBehaviour
         _rb.totalForce = Vector3.zero;
         _rb.totalTorque = 0f;
         _rb.gravityScale = 0f;
-        if(hand == rightHand)
+        if (hand == rightHand)
         {
             transform.RotateAround(hand.transform.position, -Vector3.forward, rotationSpeed);
-        }else if(hand == leftHand)
+        }
+        else if (hand == leftHand)
         {
             transform.RotateAround(hand.transform.position, Vector3.forward, rotationSpeed);
         }
@@ -290,6 +303,7 @@ public class JumpController : MonoBehaviour
             if (!_lastGrounded && _grounded)
             {
                 _animator.SetBool("OnAir", false);
+                _soundController.HitFloor();
                 _finalHorizontalDirection = Vector3.zero;
                 _rb.velocity = Vector2.zero;
                 foreach (GameObject obj in objectsDisabilitedOnGround)
@@ -302,6 +316,7 @@ public class JumpController : MonoBehaviour
             {
                 _animator.SetBool("OnAir", true);
                 _animator.SetBool("GroundCharging", false);
+                _soundController.Jump();
                 foreach (GameObject obj in objectsDisabilitedOnGround)
                 {
                     obj.SetActive(true);
@@ -358,7 +373,7 @@ public class JumpController : MonoBehaviour
     }
     public void StartJetpack()
     {
-        foreach(GameObject obj in objectsDisabilitedOnJetpack)
+        foreach (GameObject obj in objectsDisabilitedOnJetpack)
         {
             obj.SetActive(false);
         }
@@ -367,7 +382,7 @@ public class JumpController : MonoBehaviour
 
     public void EndJetpack()
     {
-        foreach(GameObject obj in objectsDisabilitedOnJetpack)
+        foreach (GameObject obj in objectsDisabilitedOnJetpack)
         {
             obj.SetActive(true);
         }
@@ -376,20 +391,9 @@ public class JumpController : MonoBehaviour
 
     private void VelocityConstraints()
     {
-        if(_comesFromBothGrab)
+        if(_rb.velocity.y < -maxFallSpeed)
         {
-            float progreso = (Time.time - tiempoInicio) / duracionTransicion;
-            progreso = Mathf.Clamp01(progreso);
-            float velocidadActual = Mathf.Lerp(velocidadInicial, maxFallSpeed, progreso);
-
-            transform.Translate(Vector3.up * velocidadActual * Time.deltaTime);
-        }
-        else
-        {
-            if(_rb.velocity.y < -maxFallSpeed)
-            {
-                _rb.velocity = new Vector2(_rb.velocity.x, -maxFallSpeed);
-            }
+            _rb.velocity = new Vector2(_rb.velocity.x, -maxFallSpeed);
         }
     }
 
@@ -407,6 +411,6 @@ public class JumpController : MonoBehaviour
     {
         EndRightAction();
         EndLeftAction();
-    } 
+    }
 }
 
