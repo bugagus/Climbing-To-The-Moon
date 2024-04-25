@@ -200,12 +200,10 @@ public class JumpController : MonoBehaviour
         if (releasedHand == leftHand)
         {
             _animator.SetBool("GrabLeft", false);
-            _soundController.Grab();
         }
         else if (releasedHand == rightHand)
         {
             _animator.SetBool("GrabRight", false);
-            _soundController.Grab();
         }
         _animator.SetBool("GrabBoth", false);
 
