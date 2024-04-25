@@ -381,7 +381,7 @@ public class JumpController : MonoBehaviour
 
     private void VelocityConstraints()
     {
-        if(_rb.velocity.y < -maxFallSpeed)
+        if(_rb.velocity.y < -maxFallSpeed && !leftHand.IsHandGrabbed && !rightHand.IsHandGrabbed)
         {
             _rb.velocity = new Vector2(_rb.velocity.x, -maxFallSpeed);
         }

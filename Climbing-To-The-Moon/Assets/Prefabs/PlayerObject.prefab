@@ -133,7 +133,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 9
   m_Sprite: {fileID: 21300000, guid: 317b10bc8edd0f84994ea144572c47ed, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -330,7 +330,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 9
   m_Sprite: {fileID: 21300000, guid: 424f119014a077749b25a4721877313a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -683,7 +683,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 9
   m_Sprite: {fileID: 21300000, guid: 424f119014a077749b25a4721877313a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -930,7 +930,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 9
   m_Sprite: {fileID: 21300000, guid: 317b10bc8edd0f84994ea144572c47ed, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -1068,7 +1068,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2970568007404473071
 Transform:
   m_ObjectHideFlags: 0
@@ -1118,11 +1118,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2222852814043176053, guid: f0fa27dd60d3fd24daf2589926ca4a5a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -2
       objectReference: {fileID: 0}
     - target: {fileID: 2222852814043176053, guid: f0fa27dd60d3fd24daf2589926ca4a5a, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 130.25
       objectReference: {fileID: 0}
     - target: {fileID: 2222852814043176053, guid: f0fa27dd60d3fd24daf2589926ca4a5a, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1194,7 +1194,7 @@ PrefabInstance:
       objectReference: {fileID: 21300000, guid: 8be2d7756ed2fb549b39e88d0e4b51a1, type: 3}
     - target: {fileID: 5553505788274135459, guid: f0fa27dd60d3fd24daf2589926ca4a5a, type: 3}
       propertyPath: m_SortingOrder
-      value: 4
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5553505788274135459, guid: f0fa27dd60d3fd24daf2589926ca4a5a, type: 3}
       propertyPath: m_WasSpriteAssigned
@@ -1202,7 +1202,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7619297623774679180, guid: f0fa27dd60d3fd24daf2589926ca4a5a, type: 3}
       propertyPath: _maxForce
-      value: 10
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 7619297623774679180, guid: f0fa27dd60d3fd24daf2589926ca4a5a, type: 3}
       propertyPath: jumpForce
@@ -1214,7 +1214,7 @@ PrefabInstance:
       objectReference: {fileID: 1680808741350270782}
     - target: {fileID: 7619297623774679180, guid: f0fa27dd60d3fd24daf2589926ca4a5a, type: 3}
       propertyPath: _chargedJump
-      value: 8.5
+      value: 6.59
       objectReference: {fileID: 0}
     - target: {fileID: 7619297623774679180, guid: f0fa27dd60d3fd24daf2589926ca4a5a, type: 3}
       propertyPath: decrsStamina
@@ -1234,7 +1234,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7619297623774679180, guid: f0fa27dd60d3fd24daf2589926ca4a5a, type: 3}
       propertyPath: maxManouverSpeed
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7619297623774679180, guid: f0fa27dd60d3fd24daf2589926ca4a5a, type: 3}
       propertyPath: maxVerticalSpeed
@@ -1254,11 +1254,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7619297623774679180, guid: f0fa27dd60d3fd24daf2589926ca4a5a, type: 3}
       propertyPath: horizontalJumpForce
-      value: 2.5
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7619297623774679180, guid: f0fa27dd60d3fd24daf2589926ca4a5a, type: 3}
       propertyPath: incrStaminaInGround
       value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 7619297623774679180, guid: f0fa27dd60d3fd24daf2589926ca4a5a, type: 3}
+      propertyPath: chargedJumpGraceTime
+      value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 7619297623774679180, guid: f0fa27dd60d3fd24daf2589926ca4a5a, type: 3}
       propertyPath: jetpackVerticalForce
@@ -1414,15 +1418,19 @@ PrefabInstance:
       objectReference: {fileID: 1142607702309346747}
     - target: {fileID: 4810158601227632260, guid: 103b66527ff1d9c4e9a16ad198ba6862, type: 3}
       propertyPath: YOffset
-      value: -6
+      value: -7
       objectReference: {fileID: 0}
     - target: {fileID: 4810158601227632260, guid: 103b66527ff1d9c4e9a16ad198ba6862, type: 3}
       propertyPath: objectToFollow
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1142607702309346747}
     - target: {fileID: 5783310203656349494, guid: 103b66527ff1d9c4e9a16ad198ba6862, type: 3}
       propertyPath: m_ConnectedAnchor.y
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5862617074640646953, guid: 103b66527ff1d9c4e9a16ad198ba6862, type: 3}
+      propertyPath: m_SortingOrder
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 6477713225613618966, guid: 103b66527ff1d9c4e9a16ad198ba6862, type: 3}
       propertyPath: m_ConnectedAnchor.y
