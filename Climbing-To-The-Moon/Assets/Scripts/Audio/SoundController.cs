@@ -28,12 +28,7 @@ public class SoundController : MonoBehaviour
     }
     public void FullCharged()
     {
-        if (_isPlaying == true) return;
-
-        _audioSource.loop = true;
-        _audioSource.clip = _fullCharged;
-        _audioSource.volume = _fullChargedV;
-        _audioSource.Play();
+        _audioSource.PlayOneShot(_fullCharged, _fullChargedV);
 
     }
     public void Text()
