@@ -267,7 +267,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2cda9247a8088134abb92b95cc37b053, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _stamina: 0
+  _stamina: 4
   _boolRechargeStamina: 0
 --- !u!95 &8283440358601027944
 Animator:

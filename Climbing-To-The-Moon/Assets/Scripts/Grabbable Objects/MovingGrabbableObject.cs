@@ -11,6 +11,7 @@ public class MovingGrabbableObject : MovingObject
     private bool _previousState;
     private void Awake()
     {
+        player = FindObjectOfType<JumpController>().transform;
         _grabbableObject = GetComponent<GrabbableObject>();
         _previousParent = player.parent;
     }

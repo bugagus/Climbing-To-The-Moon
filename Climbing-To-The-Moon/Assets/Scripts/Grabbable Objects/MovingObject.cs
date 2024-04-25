@@ -23,6 +23,7 @@ public class MovingObject : MonoBehaviour
 
     void Start()
     {
+        MoveObject();
         if (lineRenderer != null)
         {
             Vector3[] points = new Vector3[followPoints.Length];
@@ -34,12 +35,6 @@ public class MovingObject : MonoBehaviour
             lineRenderer.SetPositions(points);
         }
         transform.position = followPoints[0].position;
-    }
-
-    void Update()
-    {
-        if(Input.GetKeyDown(KeyCode.Tab))
-            MoveObject();
     }
 
     public void MoveToPoint(int pointIndex)
