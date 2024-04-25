@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using DG.Tweening;
 using Cinemachine;
 
@@ -13,7 +14,23 @@ public class IntroController : MonoBehaviour
     [SerializeField] private Transform introPoint, playerInitialPoint;
     [SerializeField] private float logoFadeSpeed;
     [SerializeField] private FadeOut logo;
+    [SerializeField] private GameObject[] objectsToActivate;
+    [SerializeField] private MoonController moonController;
+    [SerializeField] private GameObject superman;
+    public float fadeInDuration = 1.0f;
+    public float delayBetweenBackgrounds = 1.0f;
+
     private bool introEnded = false;
+
+    void Start()
+    {
+        foreach(GameObject go in objectsToActivate)
+        {
+            Color color = go.GetComponent<Image>().color;
+            color.a = 0;
+            go.GetComponent<Image>().color = color;
+        }
+    }
 
     void Update()
     {
@@ -29,22 +46,31 @@ public class IntroController : MonoBehaviour
     {
         mainCamera.gameObject.GetComponent<CinemachineBrain>().enabled = false;
         jumpController.StopMovement();
+        moonController.ShutDown();
         DOVirtual.DelayedCall(introMoonAnimationDuration, () => MoveCameraDown());
         DOVirtual.DelayedCall(introMoonAnimationDuration + cameraMoveDuration + 2, () => introDialogue.StartDialogue());
     }
 
     private void MoveCameraDown()
     {
+        superman.SetActive(false);
         mainCamera.MoveObjectToPoint(introPoint.position, cameraMoveDuration);
     }
 
     public void EndIntro()
     {
+        FindObjectOfType<FadeBackground>().NewBettle();
         if(!introEnded)
         {
             mainCamera.MoveObjectToPoint(playerInitialPoint.position, 1);
             DOVirtual.DelayedCall(1, () => {
                 introEnded = true;
+                foreach(GameObject go in objectsToActivate)
+                {
+                    Color color = go.GetComponent<Image>().color;
+                    color.a = 1;
+                    go.GetComponent<Image>().color = color;
+                }
                 jumpController.ContinueMovement();
                 mainCamera.gameObject.GetComponent<CinemachineBrain>().enabled = true;
                 });
