@@ -1222,15 +1222,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7619297623774679180, guid: f0fa27dd60d3fd24daf2589926ca4a5a, type: 3}
       propertyPath: maxFallSpeed
-      value: 3.12
+      value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 7619297623774679180, guid: f0fa27dd60d3fd24daf2589926ca4a5a, type: 3}
+      propertyPath: parentTransform
+      value: 
+      objectReference: {fileID: 3245616131320642893}
     - target: {fileID: 7619297623774679180, guid: f0fa27dd60d3fd24daf2589926ca4a5a, type: 3}
       propertyPath: _horizontalForce
       value: 6.36
       objectReference: {fileID: 0}
     - target: {fileID: 7619297623774679180, guid: f0fa27dd60d3fd24daf2589926ca4a5a, type: 3}
       propertyPath: maxManouverSpeed
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7619297623774679180, guid: f0fa27dd60d3fd24daf2589926ca4a5a, type: 3}
       propertyPath: maxVerticalSpeed
@@ -1300,6 +1304,10 @@ PrefabInstance:
       propertyPath: m_Constraints
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 9016267182088448969, guid: f0fa27dd60d3fd24daf2589926ca4a5a, type: 3}
+      propertyPath: m_CollisionDetection
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 8300765442956613431, guid: f0fa27dd60d3fd24daf2589926ca4a5a, type: 3}
@@ -1307,56 +1315,13 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 2222852814043176053, guid: f0fa27dd60d3fd24daf2589926ca4a5a, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1680808741350270782}
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 902415097310272538, guid: f0fa27dd60d3fd24daf2589926ca4a5a, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 2312575559669786468}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f0fa27dd60d3fd24daf2589926ca4a5a, type: 3}
 --- !u!4 &1142607702309346747 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2222852814043176053, guid: f0fa27dd60d3fd24daf2589926ca4a5a, type: 3}
   m_PrefabInstance: {fileID: 1225669032338997710}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &2126955500827549140 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 902415097310272538, guid: f0fa27dd60d3fd24daf2589926ca4a5a, type: 3}
-  m_PrefabInstance: {fileID: 1225669032338997710}
-  m_PrefabAsset: {fileID: 0}
---- !u!70 &2312575559669786468
-CapsuleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2126955500827549140}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0.002045244, y: -0.17354488}
-  m_Size: {x: 0.4918806, y: 0.7438512}
-  m_Direction: 0
 --- !u!1 &5635646349142819377 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6861133991045612543, guid: f0fa27dd60d3fd24daf2589926ca4a5a, type: 3}
@@ -1454,7 +1419,7 @@ PrefabInstance:
     - target: {fileID: 4810158601227632260, guid: 103b66527ff1d9c4e9a16ad198ba6862, type: 3}
       propertyPath: objectToFollow
       value: 
-      objectReference: {fileID: 1142607702309346747}
+      objectReference: {fileID: 0}
     - target: {fileID: 5783310203656349494, guid: 103b66527ff1d9c4e9a16ad198ba6862, type: 3}
       propertyPath: m_ConnectedAnchor.y
       value: 0.5
