@@ -3,106 +3,100 @@ using UnityEngine;
 
 public class MusicManager : MonoBehaviour
 {
-    [SerializeField] private AudioClip[] songs; // Array de canciones
+    [SerializeField] private AudioClip[] songs, loopSongs; // Array de canciones
     [SerializeField, Range(0f, 40f)] private float _bg1Height, _bg2Height, _bg3Height, _bg4Height;
-    [SerializeField] private AudioSource audioSource; // AudioSource para reproducir las canciones
-    [SerializeField, Range(0f, 10f)] private float fadeDuration; // Duración del fade entre canciones
-    [SerializeField, Range(0f, 1f)] private float maxVolume = 0.8f; // Volumen máximo durante el fade
-    public Animator animatorVolume;
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField, Range(0f, 10f)] private float fadeDuration;
+    [SerializeField, Range(0f, 1f)] private float maxVolume;
+    private float _previousYPos, _currentYPos;
+    private int loopingSong = 0;
     private GameObject _beetle;
+    private Coroutine _currentCoroutine;
 
     private void Awake()
     {
+        _previousYPos = 0;
         _beetle = GameObject.FindGameObjectWithTag("Player");
         audioSource.Play();
     }
 
     private void Update()
+    {   
+        if(!audioSource.isPlaying && loopingSong != -1)
+        {
+            audioSource.Stop();
+            audioSource.clip = loopSongs[loopingSong];
+            audioSource.Play();
+        }
+        _currentYPos = _beetle.transform.position.y;
+        if((_currentYPos > _bg2Height && _previousYPos < _bg2Height) ||(_currentYPos < _bg3Height && _previousYPos > _bg3Height))
+        {
+            if(_currentCoroutine!=null)
+            {
+                StopCoroutine(_currentCoroutine);
+            }
+            Debug.Log("Entro en la segunda transicion");
+            _currentCoroutine = StartCoroutine(TransicionVolumen(songs[1], 1));
+        }
+        else if((_currentYPos > _bg3Height && _previousYPos < _bg3Height) || (_currentYPos < _bg4Height && _previousYPos > _bg4Height))
+        {
+            if(_currentCoroutine!=null)
+            {
+                StopCoroutine(_currentCoroutine);
+            }
+            Debug.Log("Entro en la tercera transicion");
+            _currentCoroutine = StartCoroutine(TransicionVolumen(songs[2], 2));
+        }
+        else if(_currentYPos > _bg4Height && _previousYPos < _bg4Height)
+        {
+            if(_currentCoroutine!=null)
+            {
+                StopCoroutine(_currentCoroutine);
+            }
+            Debug.Log("Entro en la cuarta transicion");
+            _currentCoroutine = StartCoroutine(TransicionVolumen(songs[3], 3));
+        }
+        else if(_currentYPos < _bg2Height && _previousYPos > _bg2Height)
+        {
+            if(_currentCoroutine!=null)
+            {
+                StopCoroutine(_currentCoroutine);
+            }
+            Debug.Log("Entro en la primera transicion");
+            _currentCoroutine = StartCoroutine(TransicionVolumen(songs[0], 4));
+        }
+        _previousYPos = _currentYPos;
+
+    }
+
+    
+    private IEnumerator TransicionVolumen(AudioClip newClip, int index)
     {
-        if ((_beetle.transform.position.y >= _bg1Height && _beetle.transform.position.y < _bg2Height) || (_beetle.transform.position.y < _bg1Height))
+        loopingSong = -1;
+        audioSource.loop = false;
+        float tiempoInicio = Time.time;
+        float volumenInicial= audioSource.volume;
+        while (Time.time - tiempoInicio < fadeDuration)
         {
-            animatorVolume.SetBool("BajarVolumen", false);
-            Debug.Log("111");
-        }
-        else
-        {
-            // Desactivar el animador del fondo 1 si el personaje está fuera de su área
-            animatorVolume.SetBool("BajarVolumen", true);
-        }
-
-        // Activar el animador del fondo 2 si el personaje está dentro de su área
-        if ((_beetle.transform.position.y >= _bg2Height && _beetle.transform.position.y < _bg3Height) || (_beetle.transform.position.y < _bg2Height))
-        {
-            animatorVolume.SetBool("BajarVolumen", false);
-            Debug.Log("222");
-        }
-        else
-        {
-            // Desactivar el animador del fondo 2 si el personaje está fuera de su área
-            animatorVolume.SetBool("BajarVolumen", true);
+            float t = (Time.time - tiempoInicio) / fadeDuration;
+            audioSource.volume = Mathf.Lerp(volumenInicial, 0, t);
+            yield return null;
         }
 
-        // Activar el animador del fondo 3 si el personaje está dentro de su área
-        if ((_beetle.transform.position.y >= _bg3Height && _beetle.transform.position.y < _bg4Height) || (_beetle.transform.position.y < _bg3Height))
+        tiempoInicio = Time.time;
+        audioSource.volume = 0;
+        audioSource.Stop();
+        audioSource.clip = newClip;
+        audioSource.Play();
+        volumenInicial= 0;
+        while (Time.time - tiempoInicio < fadeDuration)
         {
-            animatorVolume.SetBool("BajarVolumen", false);
-            Debug.Log("333");
+            float t = (Time.time - tiempoInicio) / fadeDuration;
+            audioSource.volume = Mathf.Lerp(volumenInicial, maxVolume, t);
+            yield return null;
         }
-        else
-        {
-            // Desactivar el animador del fondo 3 si el personaje está fuera de su área
-            animatorVolume.SetBool("BajarVolumen", true);
-        }
-
-        // Activar el animador del fondo 4 si el personaje está dentro de su área
-        if ((_beetle.transform.position.y >= _bg4Height) || (_beetle.transform.position.y < _bg4Height))
-        {
-            animatorVolume.SetBool("BajarVolumen", false);
-            Debug.Log("444");
-        }
-        else
-        {
-            // Desactivar el animador del fondo 4 si el personaje está fuera de su área
-            animatorVolume.SetBool("BajarVolumen", true);
-        }
-
-        if(audioSource.volume == 0)
-        {
-            if ((_beetle.transform.position.y >= _bg1Height && _beetle.transform.position.y < _bg2Height) || (_beetle.transform.position.y < _bg1Height))
-        {
-            audioSource.Stop();
-            audioSource.clip = songs[1];
-            audioSource.Play();
-        }
-        
-
-        // Activar el animador del fondo 2 si el personaje está dentro de su área
-        if ((_beetle.transform.position.y >= _bg2Height && _beetle.transform.position.y < _bg3Height) || (_beetle.transform.position.y < _bg2Height))
-        {
-            audioSource.Stop();
-            audioSource.clip = songs[2];
-            audioSource.Play();
-        }
-        
-
-        // Activar el animador del fondo 3 si el personaje está dentro de su área
-        if ((_beetle.transform.position.y >= _bg3Height && _beetle.transform.position.y < _bg4Height) || (_beetle.transform.position.y < _bg3Height))
-        {
-            audioSource.Stop();
-            audioSource.clip = songs[3];
-            audioSource.Play();
-        }
-        
-        // Activar el animador del fondo 4 si el personaje está dentro de su área
-        if ((_beetle.transform.position.y >= _bg4Height) || (_beetle.transform.position.y < _bg4Height))
-        {
-            audioSource.Stop();
-            audioSource.clip = songs[4];
-            audioSource.Play();
-        }
-        
-        }
-
+        audioSource.volume = maxVolume;
+        loopingSong = index;
     }
 
 
