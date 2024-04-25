@@ -64,7 +64,7 @@ public class JumpController : MonoBehaviour
             chargedJumpGraceTime -= Time.deltaTime;
             if(chargedJumpGraceTime < 0)
             {
-                verticalJumpForce = _baseHorizontalJumpForce;
+                verticalJumpForce = _baseVerticalJumpForce;
                 horizontalJumpForce = _baseHorizontalJumpForce;
             }
         }
@@ -181,16 +181,6 @@ public class JumpController : MonoBehaviour
 
         if (otherHand.IsHandGrabbed == false)
         {
-            if(chargedJumpGraceTime > 0)
-            {
-                _comesFromBothGrab = true;
-                tiempoInicio = Time.time;
-                chargedJumpGraceTime = 0f;
-            }else
-            {
-                _comesFromBothGrab = false;
-                chargedJumpGraceTime = 0f;
-            }
             if (releasedHand.touchedGrabbableObject != null)
                 releasedHand.touchedGrabbableObject.IsBeingGrabbed = false;
             Vector2 direction = transform.up;
