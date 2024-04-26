@@ -17,6 +17,8 @@ public class JumpController : MonoBehaviour
     private Animator _animator;
     private bool _comesFromBothGrab = false;
     private Vector3 _finalHorizontalDirection, _rightHorizontalDirection, _leftHorizontalDirection;
+    private bool flag = false;
+    private SpriteRenderer _spriteRenderer;
 
     [Header("Hands")]
     [SerializeField] private Hand leftHand;
@@ -52,6 +54,7 @@ public class JumpController : MonoBehaviour
 
     void Start()
     {
+        _spriteRenderer = GetComponent<SpriteRenderer>();
         _originalChargedJumpGraceTime = chargedJumpGraceTime;
         _rb = GetComponent<Rigidbody2D>();
         _baseHorizontalJumpForce = horizontalJumpForce;
@@ -295,6 +298,15 @@ public class JumpController : MonoBehaviour
             if (!_lastGrounded && _grounded)
             {
                 _animator.SetBool("OnAir", false);
+                if (_rb.velocity.x < 0)
+                {
+                    flag = true;
+                    _spriteRenderer.flipX = true; // Flip the sprite
+                }
+                else if (_rb.velocity.x > 0)
+                {
+                    _spriteRenderer.flipX = false; // Do not flip the sprite
+                }
                 _soundController.HitFloor();
                 _finalHorizontalDirection = Vector3.zero;
                 _rb.velocity = Vector2.zero;
@@ -306,6 +318,10 @@ public class JumpController : MonoBehaviour
             }
             else if (_lastGrounded && !_grounded)
             {
+                if (flag)
+                {
+                    _spriteRenderer.flipX = false;
+                }
                 _animator.SetBool("OnAir", true);
                 _animator.SetBool("GroundCharging", false);
                 _soundController.Jump();
