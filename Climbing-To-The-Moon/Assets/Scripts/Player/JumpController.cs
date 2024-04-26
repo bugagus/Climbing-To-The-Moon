@@ -27,6 +27,7 @@ public class JumpController : MonoBehaviour
     [SerializeField] private Transform floorCheck, parentTransform;
     [SerializeField] private GameObject[] objectsDisabilitedOnGround;
     private bool _grounded;
+    private bool _canMove;
 
 
     [Header("Jetpack")]
@@ -319,49 +320,61 @@ public class JumpController : MonoBehaviour
 
     public void StartRightAction()
     {
-        if (rightHand.IsHandColliding == false)
+        if(_canMove)
         {
-            _rightHorizontalDirection = Vector3.right;
-            Debug.Log("Me muevo");
-            Move();
-        }
-        else
-        {
-            Grab(rightHand);
+            if (rightHand.IsHandColliding == false)
+            {
+                _rightHorizontalDirection = Vector3.right;
+                Debug.Log("Me muevo");
+                Move();
+            }
+            else
+            {
+                Grab(rightHand);
+            }
         }
     }
 
     public void StartLeftAction()
     {
-        if (leftHand.IsHandColliding == false)
+        if(_canMove)
         {
-            _leftHorizontalDirection = Vector3.left;
-            Move();
-        }
-        else
-        {
-            Grab(leftHand);
+            if (leftHand.IsHandColliding == false)
+            {
+                _leftHorizontalDirection = Vector3.left;
+                Move();
+            }
+            else
+            {
+                Grab(leftHand);
+            }
         }
     }
 
     public void EndRightAction()
     {
-        if (rightHand.IsHandGrabbed == true)
-            Release(rightHand);
-        else
-            Jump(-60);
-        _rightHorizontalDirection = Vector3.zero;
-        Move();
+        if(_canMove)
+        {
+            if (rightHand.IsHandGrabbed == true)
+                Release(rightHand);
+            else
+                Jump(-60);
+            _rightHorizontalDirection = Vector3.zero;
+            Move();
+        }
     }
 
     public void EndLeftAction()
     {
-        if (leftHand.IsHandGrabbed == true)
-            Release(leftHand);
-        else
-            Jump(60);
-        _leftHorizontalDirection = Vector3.zero;
-        Move();
+        if(_canMove)
+        {
+            if (leftHand.IsHandGrabbed == true)
+                Release(leftHand);
+            else
+                Jump(60);
+            _leftHorizontalDirection = Vector3.zero;
+            Move();
+        }
     }
     public void StartJetpack()
     {
@@ -393,12 +406,12 @@ public class JumpController : MonoBehaviour
 
     public void ContinueMovement()
     {
-        _rb.bodyType = RigidbodyType2D.Dynamic;
+        _canMove = true;
     }
 
     public void StopMovement()
     {
-        _rb.bodyType = RigidbodyType2D.Static;
+        _canMove = false;
     }
 
     public void ReleaseBoth()
