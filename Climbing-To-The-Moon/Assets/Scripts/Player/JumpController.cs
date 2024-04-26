@@ -29,7 +29,7 @@ public class JumpController : MonoBehaviour
     [SerializeField] private Transform floorCheck, parentTransform;
     [SerializeField] private GameObject[] objectsDisabilitedOnGround;
     private bool _grounded;
-    private bool _canMove;
+    private bool _canMove = true;
     private bool _chargedSound = false;
 
 

@@ -11,6 +11,7 @@ public class JetPack : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D col)
     {
+        Debug.Log("ESTOY TOCANDO ALGO");
         if(col.gameObject.CompareTag("Player"))
         {
             StartCoroutine(UseJetpack(col.gameObject));

@@ -49,6 +49,7 @@ public class ElectricObject : MonoBehaviour
         {
             _bar.dischargeNoTime(100);
             _grabbableObject.IsBeingGrabbed = false;
+            other.gameObject.GetComponent<Animator>().SetTrigger("TakeDamage");
             StartCoroutine(StopPlayer());
         }
     }
