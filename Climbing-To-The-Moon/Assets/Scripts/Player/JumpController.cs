@@ -17,6 +17,8 @@ public class JumpController : MonoBehaviour
     private Animator _animator;
     private bool _comesFromBothGrab = false;
     private Vector3 _finalHorizontalDirection, _rightHorizontalDirection, _leftHorizontalDirection;
+    private bool flag = false;
+    private SpriteRenderer _spriteRenderer;
 
     [Header("Hands")]
     [SerializeField] private Hand leftHand;
@@ -41,6 +43,9 @@ public class JumpController : MonoBehaviour
     [Header("SoundController")]
     [SerializeField] private SoundController _soundController;
 
+
+    [SerializeField] private GameObject jetpack;
+
     void Awake()
     {
         staminaBar = GameObject.FindGameObjectWithTag("StaminaBar").GetComponent<StaminaBar>();
@@ -49,12 +54,14 @@ public class JumpController : MonoBehaviour
 
     void Start()
     {
+        _spriteRenderer = GetComponent<SpriteRenderer>();
         _originalChargedJumpGraceTime = chargedJumpGraceTime;
         _rb = GetComponent<Rigidbody2D>();
         _baseHorizontalJumpForce = horizontalJumpForce;
         _baseVerticalJumpForce = verticalJumpForce;
         _animator = GetComponent<Animator>();
         _finalHorizontalDirection = Vector3.zero;
+        StopMovement();
     }
 
     void Update()
@@ -291,6 +298,15 @@ public class JumpController : MonoBehaviour
             if (!_lastGrounded && _grounded)
             {
                 _animator.SetBool("OnAir", false);
+                if (_rb.velocity.x < 0)
+                {
+                    flag = true;
+                    _spriteRenderer.flipX = true; // Flip the sprite
+                }
+                else if (_rb.velocity.x > 0)
+                {
+                    _spriteRenderer.flipX = false; // Do not flip the sprite
+                }
                 _soundController.HitFloor();
                 _finalHorizontalDirection = Vector3.zero;
                 _rb.velocity = Vector2.zero;
@@ -302,6 +318,10 @@ public class JumpController : MonoBehaviour
             }
             else if (_lastGrounded && !_grounded)
             {
+                if (flag)
+                {
+                    _spriteRenderer.flipX = false;
+                }
                 _animator.SetBool("OnAir", true);
                 _animator.SetBool("GroundCharging", false);
                 _soundController.Jump();
@@ -361,6 +381,7 @@ public class JumpController : MonoBehaviour
     }
     public void StartJetpack()
     {
+        jetpack.SetActive(true);
         foreach (GameObject obj in objectsDisabilitedOnJetpack)
         {
             obj.SetActive(false);
@@ -370,6 +391,7 @@ public class JumpController : MonoBehaviour
 
     public void EndJetpack()
     {
+        jetpack.SetActive(false);
         foreach (GameObject obj in objectsDisabilitedOnJetpack)
         {
             obj.SetActive(true);
@@ -387,12 +409,12 @@ public class JumpController : MonoBehaviour
 
     public void ContinueMovement()
     {
-
+        _rb.bodyType = RigidbodyType2D.Dynamic;
     }
 
     public void StopMovement()
     {
-
+        _rb.bodyType = RigidbodyType2D.Static;
     }
 
     public void ReleaseBoth()

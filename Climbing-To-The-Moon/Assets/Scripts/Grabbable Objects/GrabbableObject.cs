@@ -22,23 +22,23 @@ public class GrabbableObject : MonoBehaviour
 
     private void Update()
     {
-        if (IsBeingGrabbed)
-        {
-            if (!_boolRechargeStamina)
-                _staminaBar.discharge(_stamina);
+            if (IsBeingGrabbed)
+            {
+                if (!_boolRechargeStamina)
+                    _staminaBar.discharge(_stamina);
+                else
+                    _staminaBar.recharge(_stamina);
+
+
+                _animator.SetBool("Grabbed", true);
+            }
             else
-                _staminaBar.recharge(_stamina);
+                _animator.SetBool("Grabbed", false);
 
+            if (_staminaBar.stamina <= 0)
+            {
+                IsBeingGrabbed = false;
 
-            _animator.SetBool("Grabbed", true);
-        }
-        else
-            _animator.SetBool("Grabbed", false);
-
-        if (_staminaBar.stamina <= 0)
-        {
-            IsBeingGrabbed = false;
-
-        }
+            }
     }
 }

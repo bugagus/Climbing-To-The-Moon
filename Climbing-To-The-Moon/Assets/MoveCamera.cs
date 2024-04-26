@@ -16,7 +16,6 @@ public enum EasingFunction
 public class MoveCamera : MonoBehaviour
 {
     private GameObject objectToMove;
-    [SerializeField] private Transform targetPrueba;
     private float moveDuration = 2f;
     [SerializeField] private EasingFunction easingType = EasingFunction.Linear;
 
