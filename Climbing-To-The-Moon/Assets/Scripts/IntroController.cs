@@ -21,7 +21,7 @@ public class IntroController : MonoBehaviour
     public float fadeInDuration = 1.0f;
     public float delayBetweenBackgrounds = 1.0f;
 
-    private bool introEnded = false;
+    private bool _introEnded = false, _introStarted = false;
 
     void Start()
     {
@@ -35,7 +35,7 @@ public class IntroController : MonoBehaviour
 
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Tab))
+        if(Input.GetKeyDown(KeyCode.Return) && !_introStarted)
         {
             logo.StartFadeOut(logoFadeSpeed);
             DOVirtual.DelayedCall((1/logoFadeSpeed) + 1, () => StartIntro());
@@ -45,7 +45,7 @@ public class IntroController : MonoBehaviour
     
     public void StartIntro()
     {
-        mainCamera.gameObject.GetComponent<CinemachineBrain>().enabled = false;
+        _introStarted = true;
         moonController.ShutDown();
         DOVirtual.DelayedCall(introMoonAnimationDuration, () => MoveCameraDown());
         DOVirtual.DelayedCall(introMoonAnimationDuration + cameraMoveDuration + 2, () => introDialogue.StartDialogue());
@@ -60,11 +60,11 @@ public class IntroController : MonoBehaviour
     public void EndIntro()
     {
         FindObjectOfType<FadeBackground>().NewBettle();
-        if(!introEnded)
+        if(!_introEnded)
         {
             mainCamera.MoveObjectToPoint(playerInitialPoint.position, 1);
             DOVirtual.DelayedCall(1, () => {
-                introEnded = true;
+                _introEnded = true;
                 foreach(GameObject go in objectsToActivate)
                 {
                     Color color = go.GetComponent<Image>().color;

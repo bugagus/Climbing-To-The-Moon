@@ -4440,10 +4440,6 @@ PrefabInstance:
       propertyPath: displayedLines.Array.data[7].words.Array.data[11].color.m_NumColorKeys
       value: 2
       objectReference: {fileID: 0}
-    - target: {fileID: 2533261800082924938, guid: c8ff95753e35afd4fbc00d7820f5a618, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 2665789253195629600, guid: c8ff95753e35afd4fbc00d7820f5a618, type: 3}
       propertyPath: m_IsActive
       value: 0

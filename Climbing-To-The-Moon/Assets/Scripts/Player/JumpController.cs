@@ -29,7 +29,8 @@ public class JumpController : MonoBehaviour
     [SerializeField] private Transform floorCheck, parentTransform;
     [SerializeField] private GameObject[] objectsDisabilitedOnGround;
     private bool _grounded;
-    private bool _canMove;
+    private bool _canMove = true;
+    private bool _chargedSound = false;
 
 
     [Header("Jetpack")]
@@ -118,8 +119,12 @@ public class JumpController : MonoBehaviour
                     if (verticalJumpForce >= _chargedJump || horizontalJumpForce >= _chargedJump)
                     {
                         _animator.SetBool("GrabBothCharged", true);
-                        _soundController.FullCharged();
-                        _soundController.setIsPlaying(true);
+                        if(_chargedSound == false)
+                        {
+                            _soundController.FullCharged();
+                            _chargedSound = true;
+                        }
+
                         gameObject.transform.parent.DOShakePosition(0.01f, 0.01f, 1, 30, false, true, ShakeRandomnessMode.Harmonic);
                     }
                 }
@@ -176,6 +181,11 @@ public class JumpController : MonoBehaviour
 
     public void Release(Hand releasedHand)
     {
+        if(_chargedSound == true)
+        {
+            _soundController.EndFullCharged();
+            _chargedSound = false;
+        }
         Hand otherHand;
         if (releasedHand == rightHand)
         {

@@ -145,7 +145,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2cda9247a8088134abb92b95cc37b053, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _discrargeStamina: 10
+  _stamina: 0
+  _boolRechargeStamina: 0
 --- !u!95 &5605104445858523635
 Animator:
   serializedVersion: 5
@@ -287,8 +288,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a712a51e754bc245abb07bb8a9a65cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _timeBetweenElectricity: 1
-  _stunTime: 1.56
+  _timeBetweenElectricity: 4
+  _stunTime: 0.5
 --- !u!61 &4576432578036753965
 BoxCollider2D:
   m_ObjectHideFlags: 0

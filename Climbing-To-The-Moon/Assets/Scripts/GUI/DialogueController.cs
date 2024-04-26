@@ -57,7 +57,7 @@ public class DialogueController : MonoBehaviour
 
     void Update()
     {
-        if (_isInDialogue && Input.GetKeyDown(KeyCode.Space) && !tutorial)
+        if (_isInDialogue && Input.GetKeyDown(KeyCode.Return) && !tutorial )
         {
             NextLine();
         }
@@ -70,13 +70,23 @@ public class DialogueController : MonoBehaviour
 
     private void NextLine()
     {
+        int previous_line = _currentLine;
         if (_currentLine < displayedLines.Length)
         {
             if (_displayLineCoroutine != null){
                 StopCoroutine(_displayLineCoroutine);
-                _currentLine ++;
+                _currentLine++;
+                if(previous_line == (_currentLine - 2))
+                {
+                    _currentLine--;
+                }
+                if(_currentLine >= displayedLines.Length)
+                {
+                    FinishDialogue();
+                    return;
+                }
             }
-            _displayLineCoroutine = StartCoroutine(DisplayLine(displayedLines[_currentLine].lineText, _currentLine));
+                _displayLineCoroutine = StartCoroutine(DisplayLine(displayedLines[_currentLine].lineText, _currentLine));
         }
         else
         {
@@ -90,8 +100,8 @@ public class DialogueController : MonoBehaviour
         {
             dialogueText.gameObject.SetActive(true);
             _animator.SetTrigger("Appear");
-            _soundController.TextS();
         }
+        _soundController.TextS();
         continueIcon.SetActive(false);
         dialogueText.text = "";
         

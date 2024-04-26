@@ -14,7 +14,10 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/Main.unity
     guid: abf4b30d691948443a622107df385e8e
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Sergio.unity
     guid: 0f6d579d185427e4f892eb597bd3f1ca
+  - enabled: 1
+    path: Assets/Scenes/Game.unity
+    guid: e98000ac2a7015a469c473366f518ff5
   m_configObjects: {}
