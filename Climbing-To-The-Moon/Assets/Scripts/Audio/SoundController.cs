@@ -24,22 +24,25 @@ public class SoundController : MonoBehaviour
     }
     public void Charging()
     {
-        if(!_isPlaying)
-        {
-            _audioSource.loop = false;
-            _audioSource.clip = _charging;
-            _audioSource.Play();
-        }
+       
     }
     public void FullCharged()
     {
-        if(!_isPlaying)
-        {
-            _audioSource.loop = false;
-            _audioSource.clip = _charging;
-            _audioSource.Play();
-        }
+        _audioSource.Stop();
+        _audioSource.clip = _fullCharged;
+        _audioSource.volume = _fullChargedV;
+        _audioSource.loop = false;
+        _audioSource.Play();
 
+    }
+
+    public void EndFullCharged()
+    {
+        if(_audioSource.clip == _fullCharged)
+        {
+            _audioSource.Stop();
+        }
+        
     }
     public void TextS()
     {
