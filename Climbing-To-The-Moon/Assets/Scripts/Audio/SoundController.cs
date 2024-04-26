@@ -41,7 +41,7 @@ public class SoundController : MonoBehaviour
         }
 
     }
-    public void Text()
+    public void TextS()
     {
         _audioSource.PlayOneShot(_text, _textV);
     }
