@@ -25,6 +25,7 @@ public class OptionsMenu : MonoBehaviour
 
     public void Pause()
     {
+        Debug.Log("ESTOY CLICKANDO");
         if (activeEnumerator == null)
         {
             if (!pausedMenu)

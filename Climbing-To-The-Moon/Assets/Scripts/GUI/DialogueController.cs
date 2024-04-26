@@ -70,11 +70,16 @@ public class DialogueController : MonoBehaviour
 
     private void NextLine()
     {
+        int previous_line = _currentLine;
         if (_currentLine < displayedLines.Length)
         {
             if (_displayLineCoroutine != null){
                 StopCoroutine(_displayLineCoroutine);
-                _currentLine ++;
+                _currentLine++;
+                if(previous_line == (_currentLine - 2))
+                {
+                    _currentLine--;
+                }
                 if(_currentLine >= displayedLines.Length)
                 {
                     FinishDialogue();
@@ -95,8 +100,8 @@ public class DialogueController : MonoBehaviour
         {
             dialogueText.gameObject.SetActive(true);
             _animator.SetTrigger("Appear");
-            _soundController.TextS();
         }
+        _soundController.TextS();
         continueIcon.SetActive(false);
         dialogueText.text = "";
         

@@ -4,7 +4,7 @@ using UnityEngine;
 public class MusicManager : MonoBehaviour
 {
     [SerializeField] private AudioClip[] songs, loopSongs; // Array de canciones
-    [SerializeField, Range(0f, 40f)] private float _bg1Height, _bg2Height, _bg3Height, _bg4Height;
+    [SerializeField] private float _bg1Height, _bg2Height, _bg3Height, _bg4Height;
     [SerializeField] private AudioSource audioSource;
     [SerializeField, Range(0f, 10f)] private float fadeDuration;
     [SerializeField, Range(0f, 1f)] private float maxVolume;
