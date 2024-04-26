@@ -36,6 +36,7 @@ public class DialogueController : MonoBehaviour
     [SerializeField] public DisplayedLines[] displayedLines;
     [SerializeField] private GameObject continueIcon;
     public int _currentLine;
+    public bool tutorial;
     public int CurrentLetter { get; private set; }
     private Animator _animator;
     private Coroutine _displayLineCoroutine;
@@ -52,7 +53,7 @@ public class DialogueController : MonoBehaviour
 
     void Update()
     {
-        if (_isInDialogue && Input.GetKeyDown(KeyCode.Space) )
+        if (_isInDialogue && Input.GetKeyDown(KeyCode.Space) && !tutorial)
         {
             NextLine();
         }
@@ -67,7 +68,10 @@ public class DialogueController : MonoBehaviour
     {
         if (_currentLine < displayedLines.Length)
         {
-            if (_displayLineCoroutine != null) StopCoroutine(_displayLineCoroutine);
+            if (_displayLineCoroutine != null){
+                StopCoroutine(_displayLineCoroutine);
+                _currentLine ++;
+            }
             _displayLineCoroutine = StartCoroutine(DisplayLine(displayedLines[_currentLine].lineText, _currentLine));
         }
         else
@@ -85,9 +89,10 @@ public class DialogueController : MonoBehaviour
         }
         continueIcon.SetActive(false);
         dialogueText.text = "";
+        
+        dialogueText.alpha = 0;
 
         dialogueText.text = line;
-        dialogueText.alpha = 0;
 
         CurrentLetter = 0;
         List<int> wordLengths = textWobble.UpdateTextState();
@@ -123,7 +128,7 @@ public class DialogueController : MonoBehaviour
         continueIcon.SetActive(true);
     }
 
-    private void FinishDialogue()
+    public void FinishDialogue()
     {
         FindObjectOfType<IntroController>().EndIntro();
         continueIcon.SetActive(false);

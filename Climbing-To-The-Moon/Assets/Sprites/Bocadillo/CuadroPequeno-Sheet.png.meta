@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 48cbcbd5782f1fa4db287af2c8a96da6
+guid: bb6a9481c4ce54942a59d7e708493ee7
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -110,13 +110,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: CuadroTextoPequeno_0
+      name: CuadroPequeno-Sheet_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 170
-        height: 62
+        height: 36
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -124,20 +124,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 506a15bd741777647a8d674e25a3f4e1
-      internalID: -1606845561
+      spriteID: bdebe418c47e14643b735f9616b76c0d
+      internalID: -2112092715
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CuadroTextoPequeno_1
+      name: CuadroPequeno-Sheet_1
       rect:
         serializedVersion: 2
         x: 170
         y: 0
         width: 170
-        height: 62
+        height: 36
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -145,20 +145,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ce77553a88673844f874ba9495172091
-      internalID: -280884554
+      spriteID: 42ae1d09cdd7e1440bc9ea4864bb54cf
+      internalID: 2030723518
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CuadroTextoPequeno_2
+      name: CuadroPequeno-Sheet_2
       rect:
         serializedVersion: 2
         x: 340
         y: 0
         width: 170
-        height: 62
+        height: 36
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -166,20 +166,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0968c6202e521624e87e9ae8d695b824
-      internalID: -1194265895
+      spriteID: a487d195659c19b4bb805ff128e9ead7
+      internalID: -1305097423
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CuadroTextoPequeno_3
+      name: CuadroPequeno-Sheet_3
       rect:
         serializedVersion: 2
         x: 510
         y: 0
         width: 170
-        height: 62
+        height: 36
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -187,20 +187,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2c6d8b4ae90dd384f8eba78afb2d79d8
-      internalID: -1267411840
+      spriteID: 520027ca525053b47b038032fda8ed80
+      internalID: -1195727432
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CuadroTextoPequeno_4
+      name: CuadroPequeno-Sheet_4
       rect:
         serializedVersion: 2
         x: 680
         y: 0
         width: 170
-        height: 62
+        height: 36
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -208,20 +208,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6d5458f7a82ce7b4186e64ab5dc0127f
-      internalID: 1128463188
+      spriteID: ac2fd68a657db8e49a03cd56e6138584
+      internalID: -64884185
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CuadroTextoPequeno_5
+      name: CuadroPequeno-Sheet_5
       rect:
         serializedVersion: 2
         x: 850
         y: 0
         width: 170
-        height: 62
+        height: 36
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -229,8 +229,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: dfd38cff9db623040ba210a6c6afd7bb
-      internalID: -822968804
+      spriteID: 25c943623183c8e4f94c66410f7821d6
+      internalID: 1006622018
       vertices: []
       indices: 
       edges: []
@@ -246,12 +246,12 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      CuadroTextoPequeno_0: -1606845561
-      CuadroTextoPequeno_1: -280884554
-      CuadroTextoPequeno_2: -1194265895
-      CuadroTextoPequeno_3: -1267411840
-      CuadroTextoPequeno_4: 1128463188
-      CuadroTextoPequeno_5: -822968804
+      CuadroPequeno-Sheet_0: -2112092715
+      CuadroPequeno-Sheet_1: 2030723518
+      CuadroPequeno-Sheet_2: -1305097423
+      CuadroPequeno-Sheet_3: -1195727432
+      CuadroPequeno-Sheet_4: -64884185
+      CuadroPequeno-Sheet_5: 1006622018
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
