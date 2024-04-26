@@ -1162,6 +1162,14 @@ PrefabInstance:
       propertyPath: _textV
       value: 0.089
       objectReference: {fileID: 0}
+    - target: {fileID: 8603707790931312200, guid: ab449ed5cc8795a4d94239af317dbfff, type: 3}
+      propertyPath: _moonLight
+      value: 
+      objectReference: {fileID: 8300000, guid: e68ff0c0392e31a4b96d7ad749f42a53, type: 3}
+    - target: {fileID: 8603707790931312200, guid: ab449ed5cc8795a4d94239af317dbfff, type: 3}
+      propertyPath: _moonlightV
+      value: 0.074
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3445,6 +3453,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 542798014}
+  _soundController: {fileID: 112198682}
 --- !u!212 &542798016
 SpriteRenderer:
   m_ObjectHideFlags: 0

@@ -5,8 +5,8 @@ using UnityEngine.Audio;
 
 public class SoundController : MonoBehaviour
 {
-    [SerializeField] private AudioClip _grab, _jump, _jetpack, _charging, _fullCharged, _text, _hit, _hitFloor;
-    [SerializeField, Range(0f, 1f)] private float _grabV, _jumpV, _jetpackV, _chargingV, _fullChargedV, _textV, _hitV, _hitFloorV;
+    [SerializeField] private AudioClip _grab, _jump, _jetpack, _charging, _fullCharged, _text, _hit, _hitFloor, _moonLight;
+    [SerializeField, Range(0f, 1f)] private float _grabV, _jumpV, _jetpackV, _chargingV, _fullChargedV, _textV, _hitV, _hitFloorV, _moonlightV;
     [SerializeField] private AudioSource _audioSource;
     private bool _isPlaying = false;
 
@@ -52,6 +52,11 @@ public class SoundController : MonoBehaviour
     public void HitFloor()
     {
         _audioSource.PlayOneShot(_hitFloor, _hitFloorV);
+    }
+
+    public void MoonLight()
+    {
+        _audioSource.PlayOneShot(_moonLight, _moonlightV);
     }
 
     public void setIsPlaying(bool isPlaying)
