@@ -42,6 +42,9 @@ public class DialogueController : MonoBehaviour
     private Coroutine _displayLineCoroutine;
     private bool _isInDialogue;
     [SerializeField] private TextWobble textWobble;
+     
+    [Header("SoundController")]
+    [SerializeField] private SoundController _soundController;
 
     void Start()
     {
@@ -49,6 +52,7 @@ public class DialogueController : MonoBehaviour
         _isInDialogue = false;
         _animator = GetComponent<Animator>();
         _animator.speed = 1f/animationDuration;
+
     } 
 
     void Update()
@@ -91,6 +95,7 @@ public class DialogueController : MonoBehaviour
         {
             dialogueText.gameObject.SetActive(true);
             _animator.SetTrigger("Appear");
+            _soundController.TextS();
         }
         continueIcon.SetActive(false);
         dialogueText.text = "";
