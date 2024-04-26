@@ -35,7 +35,7 @@ public class IntroController : MonoBehaviour
 
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Tab))
+        if(Input.GetKeyDown(KeyCode.Return))
         {
             logo.StartFadeOut(logoFadeSpeed);
             DOVirtual.DelayedCall((1/logoFadeSpeed) + 1, () => StartIntro());
@@ -45,7 +45,6 @@ public class IntroController : MonoBehaviour
     
     public void StartIntro()
     {
-        mainCamera.gameObject.GetComponent<CinemachineBrain>().enabled = false;
         moonController.ShutDown();
         DOVirtual.DelayedCall(introMoonAnimationDuration, () => MoveCameraDown());
         DOVirtual.DelayedCall(introMoonAnimationDuration + cameraMoveDuration + 2, () => introDialogue.StartDialogue());

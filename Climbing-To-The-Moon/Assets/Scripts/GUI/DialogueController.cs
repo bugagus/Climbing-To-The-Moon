@@ -53,7 +53,7 @@ public class DialogueController : MonoBehaviour
 
     void Update()
     {
-        if (_isInDialogue && Input.GetKeyDown(KeyCode.Space) && !tutorial)
+        if (_isInDialogue && Input.GetKeyDown(KeyCode.Return) && !tutorial )
         {
             NextLine();
         }
@@ -71,8 +71,13 @@ public class DialogueController : MonoBehaviour
             if (_displayLineCoroutine != null){
                 StopCoroutine(_displayLineCoroutine);
                 _currentLine ++;
+                if(_currentLine >= displayedLines.Length)
+                {
+                    FinishDialogue();
+                    return;
+                }
             }
-            _displayLineCoroutine = StartCoroutine(DisplayLine(displayedLines[_currentLine].lineText, _currentLine));
+                _displayLineCoroutine = StartCoroutine(DisplayLine(displayedLines[_currentLine].lineText, _currentLine));
         }
         else
         {
